@@ -3,9 +3,12 @@
 
 <head>
 
+<meta charset="UTF-8">
 <title>Dashboard</title>
 
 <link rel="stylesheet" href="css/dashboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 </head>
 
@@ -17,9 +20,8 @@
 
 <a href="#">Dashboard</a>
 <a href="#">Pedidos</a>
-<a href="#">Marmitas</a>
 <a href="#">Agenda</a>
-<a href="#">Clientes</a>
+<a href="#">Marmitas</a>
 
 </div>
 
@@ -30,46 +32,29 @@
 <div class="cards">
 
 <div class="card">
-
-<h3>Pedidos Hoje</h3>
-
-<p id="pedidos">0</p>
-
+<h3>Pedidos</h3>
+<p id="totalPedidos">0</p>
 </div>
 
 <div class="card">
-
 <h3>Agendamentos</h3>
-
-<p id="agenda">0</p>
-
+<p id="totalAgenda">0</p>
 </div>
 
 <div class="card">
-
 <h3>Marmitas</h3>
-
-<p id="marmitas">0</p>
-
+<p id="totalMarmitas">0</p>
 </div>
 
 </div>
 
-<div class="crud">
+<h2>Últimos Pedidos</h2>
 
-<h2>Gerenciar Marmitas</h2>
-
-<input id="nomeMarmita">
-<input id="precoMarmita">
-
-<button onclick="criarMarmita()">
-Cadastrar
-</button>
+<div id="listaPedidos"></div>
 
 </div>
 
-</div>
-
+<script src="js/supabase.js"></script>
 <script src="js/dashboard.js"></script>
 
 </body>

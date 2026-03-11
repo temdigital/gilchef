@@ -3,25 +3,22 @@
 
 <head>
 
-<title>Área do Cliente</title>
+<meta charset="UTF-8">
+<title>Pedidos</title>
 
-<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 </head>
 
 <body>
 
-<h1>Área do Cliente</h1>
-
-<section>
-
 <h2>Fazer Pedido</h2>
 
-<input id="nome" placeholder="Seu nome">
+<input id="cliente" placeholder="Nome">
 
 <input id="telefone" placeholder="Telefone">
 
-<select id="marmita">
+<select id="produto">
 
 <option>Frango Fit</option>
 <option>Carne com Legumes</option>
@@ -33,9 +30,8 @@
 Enviar Pedido
 </button>
 
-</section>
-
-<script src="js/cliente.js"></script>
+<script src="js/supabase.js"></script>
+<script src="js/pedidos.js"></script>
 
 </body>
 

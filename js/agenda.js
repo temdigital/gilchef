@@ -1,17 +1,26 @@
-async function reservar(){
+async function agendar(){
 
-const data = document.getElementById("data").value;
+const cliente =
+document.getElementById("cliente").value
 
-const cliente = document.getElementById("cliente").value;
+const telefone =
+document.getElementById("telefone").value
 
-await supabase.from("agendamentos").insert({
+const data =
+document.getElementById("data").value
+
+const evento =
+document.getElementById("evento").value
+
+await supabase.from("agenda").insert({
 
 cliente:cliente,
+telefone:telefone,
 data:data,
-status:"pendente"
+evento:evento
 
-});
+})
 
-alert("Agendamento solicitado!");
+alert("Agendamento solicitado!")
 
 }

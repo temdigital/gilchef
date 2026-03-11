@@ -1,10 +1,9 @@
 async function carregarCardapio(){
 
-const { data } = await supabase
-.from("marmitas")
-.select("*");
+const { data } =
+await supabase.from("marmitas").select("*")
 
-const div = document.getElementById("cardapio");
+const div = document.getElementById("cardapio")
 
 data.forEach(item=>{
 
@@ -22,8 +21,10 @@ div.innerHTML += `
 
 </div>
 
-`;
+`
 
-});
+})
 
 }
+
+carregarCardapio()
