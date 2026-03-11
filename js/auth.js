@@ -1,9 +1,16 @@
+const botao = document.getElementById("btnLogin")
+
+botao.addEventListener("click", login)
+
 async function login(){
 
 const email = document.getElementById("email").value
 const senha = document.getElementById("senha").value
+const msg = document.getElementById("msg")
 
-const { data, error } = await supabase.auth.signInWithPassword({
+msg.innerText = "Entrando..."
+
+const { data, error } = await supabaseClient.auth.signInWithPassword({
 
 email: email,
 password: senha
@@ -12,12 +19,18 @@ password: senha
 
 if(error){
 
-alert("Login inválido")
+msg.innerText = "Email ou senha inválidos"
 
-}else{
+return
+
+}
+
+msg.innerText = "Login realizado com sucesso!"
+
+setTimeout(()=>{
 
 window.location.href="dashboard.html"
 
-}
+},1000)
 
 }

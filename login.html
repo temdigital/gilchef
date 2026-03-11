@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
 
 <meta charset="UTF-8">
-<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login - Gil Buffet</title>
 
 <link rel="stylesheet" href="css/style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
@@ -18,11 +20,13 @@
 
 <h2>Área Administrativa</h2>
 
-<input id="email" placeholder="Email">
+<input id="email" type="email" placeholder="Email">
 
 <input id="senha" type="password" placeholder="Senha">
 
-<button onclick="login()">Entrar</button>
+<button id="btnLogin">Entrar</button>
+
+<p id="msg"></p>
 
 </div>
 
