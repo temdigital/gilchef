@@ -3,8 +3,6 @@
 
 <head>
 
-<meta charset="UTF-8">
-
 <title>Dashboard</title>
 
 <link rel="stylesheet" href="css/dashboard.css">
@@ -20,8 +18,8 @@
 <a href="#">Dashboard</a>
 <a href="#">Pedidos</a>
 <a href="#">Marmitas</a>
-<a href="#">Agendamentos</a>
-<a href="#">Usuários</a>
+<a href="#">Agenda</a>
+<a href="#">Clientes</a>
 
 </div>
 
@@ -33,9 +31,9 @@
 
 <div class="card">
 
-<h3>Pedidos</h3>
+<h3>Pedidos Hoje</h3>
 
-<p id="totalPedidos">0</p>
+<p id="pedidos">0</p>
 
 </div>
 
@@ -43,7 +41,7 @@
 
 <h3>Agendamentos</h3>
 
-<p id="totalAgendamentos">0</p>
+<p id="agenda">0</p>
 
 </div>
 
@@ -51,9 +49,22 @@
 
 <h3>Marmitas</h3>
 
-<p id="totalMarmitas">0</p>
+<p id="marmitas">0</p>
 
 </div>
+
+</div>
+
+<div class="crud">
+
+<h2>Gerenciar Marmitas</h2>
+
+<input id="nomeMarmita">
+<input id="precoMarmita">
+
+<button onclick="criarMarmita()">
+Cadastrar
+</button>
 
 </div>
 

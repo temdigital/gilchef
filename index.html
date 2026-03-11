@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 
 <meta charset="UTF-8">
@@ -7,50 +8,59 @@
 
 <title>Gil Buffet & Congelados</title>
 
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
 
-<header>
+<header class="topo">
 
 <h1>Gil Buffet & Congelados</h1>
 
 <nav>
 
-<a href="login.html" class="btn-login">Área do Cliente</a>
+<a href="#servicos">Serviços</a>
+<a href="#cardapio">Marmitas</a>
+<a href="#videos">Receitas</a>
+<a href="login.html" class="login-btn">Login</a>
 
 </nav>
 
 </header>
 
+
 <section class="hero">
-
-<img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-
-<div class="hero-text">
 
 <h2>Alta Gastronomia com Sabor Caseiro</h2>
 
 <p>
-O Chef Gildesio prepara experiências gastronômicas exclusivas,
-marmitas saudáveis e serviços de Personal Chef para eventos.
+O Chef Gildesio transforma ingredientes frescos em experiências gastronômicas memoráveis.
+Da marmita saudável do dia a dia até eventos exclusivos com Personal Chef.
 </p>
 
-<button onclick="agendarChef()">
-Agendar Personal Chef
-</button>
+<button onclick="agendarChef()">Agendar Personal Chef</button>
 
-<button onclick="encomendarMarmita()">
-Encomendar Marmitas
-</button>
+<button onclick="encomendarMarmita()">Encomendar Marmitas</button>
+
+</section>
+
+<section class="carousel">
+
+<h2>Delícias Preparadas pelo Chef</h2>
+
+<div class="carousel-container">
+
+<img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+<img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg">
+<img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg">
 
 </div>
 
 </section>
 
-<section class="servicos">
+
+<section id="servicos">
 
 <h2>Nossos Serviços</h2>
 
@@ -58,24 +68,22 @@ Encomendar Marmitas
 
 <div class="card">
 
-<img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg">
-
 <h3>Personal Chef</h3>
 
 <p>
 Experiência gastronômica exclusiva na sua casa.
+Ideal para aniversários, encontros familiares ou jantares especiais.
 </p>
 
 </div>
 
 <div class="card">
 
-<img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg">
-
 <h3>Marmitas Saudáveis</h3>
 
 <p>
-Comida caseira nutritiva pronta para seu dia.
+Pratos equilibrados preparados com ingredientes frescos.
+Sabor caseiro com qualidade de restaurante.
 </p>
 
 </div>
@@ -84,7 +92,50 @@ Comida caseira nutritiva pronta para seu dia.
 
 </section>
 
+<section id="videos">
+
+<h2>Receitas e Bastidores</h2>
+
+<div class="videos">
+
+<iframe width="350" height="200"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+
+<iframe width="350" height="200"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="rodape">
+
+<p>Gil Buffet & Congelados</p>
+
+<p>Chef Gildesio</p>
+
+<p>WhatsApp: (61) 99928-9239</p>
+
+<div class="social">
+
+<a href="#">Instagram</a>
+<a href="#">YouTube</a>
+<a href="#">WhatsApp</a>
+
+</div>
+
+<a href="login.html" class="login-footer">
+Área administrativa
+</a>
+
+</div>
+
+</footer>
+
 <script src="js/whatsapp.js"></script>
 
 </body>
+
 </html>

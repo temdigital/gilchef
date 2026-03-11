@@ -1,14 +1,25 @@
 body{
 
-font-family: Arial;
+font-family:Arial;
 margin:0;
+
+}
+
+header{
+
+display:flex;
+justify-content:space-between;
+padding:20px;
+background:#111;
+color:white;
 
 }
 
 .hero{
 
-display:flex;
-flex-wrap:wrap;
+padding:80px;
+text-align:center;
+background:#f5f5f5;
 
 }
 
@@ -20,11 +31,18 @@ gap:20px;
 
 }
 
-.sidebar{
+.carousel img{
 
-width:250px;
-height:100vh;
+width:300px;
+border-radius:10px;
+
+}
+
+footer{
+
 background:#111;
 color:white;
+padding:40px;
+text-align:center;
 
 }
