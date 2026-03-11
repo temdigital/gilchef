@@ -14,46 +14,41 @@
 
 <body>
 
-<header class="topo">
+<header>
 
-<h1>Gil Buffet & Congelados</h1>
+<div class="logo">
+Gil Buffet & Congelados
+</div>
 
 <nav>
 
 <a href="#servicos">Serviços</a>
-<a href="#cardapio">Marmitas</a>
+<a href="#marmitas">Marmitas</a>
 <a href="#videos">Receitas</a>
-<a href="login.html" class="login-btn">Login</a>
+<a href="login.html">Login</a>
 
 </nav>
 
 </header>
 
-
 <section class="hero">
 
-<h2>Alta Gastronomia com Sabor Caseiro</h2>
+<div class="hero-overlay">
+
+<h1>Alta Gastronomia com Sabor Caseiro</h1>
 
 <p>
-O Chef Gildesio transforma ingredientes frescos em experiências gastronômicas memoráveis.
-Da marmita saudável do dia a dia até eventos exclusivos com Personal Chef.
+O Chef Gildesio transforma ingredientes frescos em experiências gastronômicas inesquecíveis.
+Marmitas saudáveis e serviço de Personal Chef para eventos especiais.
 </p>
+
+<div class="hero-buttons">
 
 <button onclick="agendarChef()">Agendar Personal Chef</button>
 
-<button onclick="encomendarMarmita()">Encomendar Marmitas</button>
+<button class="btn2" onclick="encomendarMarmita()">Encomendar Marmitas</button>
 
-</section>
-
-<section class="carousel">
-
-<h2>Delícias Preparadas pelo Chef</h2>
-
-<div class="carousel-container">
-
-<img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg">
-<img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg">
-<img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg">
+</div>
 
 </div>
 
@@ -68,22 +63,37 @@ Da marmita saudável do dia a dia até eventos exclusivos com Personal Chef.
 
 <div class="card">
 
+<img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg">
+
 <h3>Personal Chef</h3>
 
 <p>
-Experiência gastronômica exclusiva na sua casa.
-Ideal para aniversários, encontros familiares ou jantares especiais.
+Experiência gastronômica exclusiva no conforto da sua casa.
+Ideal para encontros especiais e eventos privados.
 </p>
 
 </div>
 
 <div class="card">
 
+<img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg">
+
 <h3>Marmitas Saudáveis</h3>
 
 <p>
-Pratos equilibrados preparados com ingredientes frescos.
-Sabor caseiro com qualidade de restaurante.
+Pratos equilibrados preparados com ingredientes frescos e sabor caseiro.
+</p>
+
+</div>
+
+<div class="card">
+
+<img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+
+<h3>Eventos Gastronômicos</h3>
+
+<p>
+Buffet completo para aniversários, encontros familiares e celebrações.
 </p>
 
 </div>
@@ -91,6 +101,23 @@ Sabor caseiro com qualidade de restaurante.
 </div>
 
 </section>
+
+
+<section id="marmitas">
+
+<h2>Delícias Preparadas pelo Chef</h2>
+
+<div class="carousel">
+
+<img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+<img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg">
+<img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg">
+<img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg">
+
+</div>
+
+</section>
+
 
 <section id="videos">
 
@@ -98,21 +125,20 @@ Sabor caseiro com qualidade de restaurante.
 
 <div class="videos">
 
-<iframe width="350" height="200"
-src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+<iframe width="350" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
 
-<iframe width="350" height="200"
-src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+<iframe width="350" height="200" src="https://www.youtube.com/embed/1-SJGQ2HLp8"></iframe>
 
 </div>
 
 </section>
 
+
 <footer>
 
-<div class="rodape">
+<div class="footer-content">
 
-<p>Gil Buffet & Congelados</p>
+<h3>Gil Buffet & Congelados</h3>
 
 <p>Chef Gildesio</p>
 
@@ -126,15 +152,14 @@ src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
 
 </div>
 
-<a href="login.html" class="login-footer">
-Área administrativa
-</a>
+<a href="login.html" class="footer-login">Área Administrativa</a>
 
 </div>
 
 </footer>
 
 <script src="js/whatsapp.js"></script>
+<script src="js/main.js"></script>
 
 </body>
 
