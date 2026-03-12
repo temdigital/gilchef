@@ -1,0 +1,68 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+height:100vh;
+display:flex;
+}
+
+.login-container{
+display:flex;
+width:100%;
+}
+
+.login-image{
+flex:1;
+background:url("https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg") center/cover;
+}
+
+.login-form{
+flex:1;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px;
+}
+
+.login-form h2{
+margin-bottom:20px;
+}
+
+.login-form input{
+width:250px;
+padding:12px;
+margin:10px 0;
+border:1px solid #ddd;
+}
+
+.login-form button{
+width:250px;
+padding:12px;
+background:#c79a3b;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+.login-form a{
+margin-top:15px;
+text-decoration:none;
+color:#333;
+}
+
+@media(max-width:768px){
+
+.login-image{
+display:none;
+}
+
+.login-form{
+flex:1;
+}
+
+}

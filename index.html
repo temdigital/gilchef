@@ -6,181 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gil Chef | Buffet & Experiências Gastronômicas</title>
+<title>Gil Buffet & Congelados</title>
 
-<style>
-
-/* RESET */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-background:#f8f8f8;
-color:#333;
-}
-
-/* HEADER */
-
-header{
-background:#111;
-color:white;
-padding:15px 30px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.logo{
-font-size:22px;
-font-weight:bold;
-}
-
-/* MENU */
-
-nav ul{
-display:flex;
-list-style:none;
-gap:25px;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-font-size:16px;
-}
-
-nav a:hover{
-color:#f4b400;
-}
-
-/* HAMBURGUER */
-
-.hamburger{
-display:none;
-font-size:26px;
-cursor:pointer;
-}
-
-/* HERO */
-
-.hero{
-height:70vh;
-background:url("https://images.unsplash.com/photo-1551218808-94e220e084d2") center/cover;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-.hero h1{
-font-size:40px;
-background:rgba(0,0,0,0.5);
-padding:20px;
-border-radius:10px;
-}
-
-/* SEÇÃO */
-
-section{
-padding:60px 30px;
-max-width:1100px;
-margin:auto;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:30px;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-text-align:center;
-}
-
-/* FOOTER */
-
-footer{
-background:#111;
-color:white;
-padding:40px 20px;
-text-align:center;
-}
-
-.admin-btn{
-
-margin-top:20px;
-display:inline-block;
-background:#f4b400;
-color:black;
-padding:12px 20px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s;
-
-}
-
-.admin-btn:hover{
-background:#ffd84d;
-}
-
-/* RESPONSIVIDADE */
-
-@media (max-width:900px){
-
-.cards{
-grid-template-columns:repeat(2,1fr);
-}
-
-}
-
-@media (max-width:700px){
-
-nav ul{
-position:absolute;
-top:65px;
-left:0;
-width:100%;
-background:#111;
-flex-direction:column;
-align-items:center;
-display:none;
-padding:20px 0;
-}
-
-nav ul.show{
-display:flex;
-}
-
-.hamburger{
-display:block;
-}
-
-.cards{
-grid-template-columns:1fr;
-}
-
-.hero h1{
-font-size:28px;
-}
-
-}
-
-</style>
+<link rel="stylesheet" href="css/style.css">
 
 </head>
 
@@ -188,75 +16,156 @@ font-size:28px;
 
 <header>
 
-<div class="logo">Gil Chef</div>
+<div class="logo">
+Gil Buffet & Congelados
+</div>
 
-<div class="hamburger" onclick="toggleMenu()">☰</div>
+<button class="menu-toggle" id="menuToggle">
+☰
+</button>
 
-<nav>
-<ul id="menu">
+<nav id="navMenu">
 
-<li><a href="#">Início</a></li>
-<li><a href="#">Cardápio</a></li>
-<li><a href="#">Eventos</a></li>
-<li><a href="#">Contato</a></li>
+<a href="#servicos">Serviços</a>
+<a href="#marmitas">Marmitas</a>
+<a href="#videos">Receitas</a>
+<a href="login.html">Login</a>
 
-</ul>
 </nav>
 
 </header>
 
+
 <section class="hero">
 
-<h1>Experiências Gastronômicas Exclusivas</h1>
+<div class="hero-overlay">
+
+<h1>Alta Gastronomia com Sabor Caseiro</h1>
+
+<p>
+O Chef Gildesio transforma ingredientes frescos em experiências gastronômicas inesquecíveis.
+Marmitas saudáveis e serviço de Personal Chef para eventos especiais.
+</p>
+
+<div class="hero-buttons">
+
+<button onclick="agendarChef()">Agendar Personal Chef</button>
+
+<button class="btn2" onclick="encomendarMarmita()">Encomendar Marmitas</button>
+
+</div>
+
+</div>
 
 </section>
 
-<section>
 
-<h2 style="text-align:center;margin-bottom:40px;">Nossos Serviços</h2>
+<section id="servicos">
+
+<h2>Nossos Serviços</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>Eventos Privados</h3>
-<p>Buffet completo para festas e celebrações.</p>
+
+<img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg">
+
+<h3>Personal Chef</h3>
+
+<p>
+Experiência gastronômica exclusiva no conforto da sua casa.
+Ideal para encontros especiais e eventos privados.
+</p>
+
 </div>
 
 <div class="card">
-<h3>Chef em Casa</h3>
-<p>Experiência gastronômica personalizada.</p>
+
+<img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg">
+
+<h3>Marmitas Saudáveis</h3>
+
+<p>
+Pratos equilibrados preparados com ingredientes frescos e sabor caseiro.
+</p>
+
 </div>
 
 <div class="card">
-<h3>Eventos Corporativos</h3>
-<p>Cardápio premium para empresas.</p>
+
+<img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+
+<h3>Eventos Gastronômicos</h3>
+
+<p>
+Buffet completo para aniversários, encontros familiares e celebrações.
+</p>
+
 </div>
 
 </div>
 
 </section>
 
+
+<section id="marmitas">
+
+<h2>Delícias Preparadas pelo Chef</h2>
+
+<div class="carousel">
+
+<img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg">
+<img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg">
+<img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg">
+<img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg">
+
+</div>
+
+</section>
+
+
+<section id="videos">
+
+<h2>Receitas e Bastidores</h2>
+
+<div class="videos">
+
+<iframe width="350" height="200" src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>
+
+<iframe width="350" height="200" src="https://www.youtube.com/embed/1-SJGQ2HLp8"></iframe>
+
+</div>
+
+</section>
+
+
 <footer>
 
-<p>© 2026 Gil Chef Buffet</p>
+<div class="footer-content">
 
-<a href="login.html" class="admin-btn">
-Área Administrativa
-</a>
+<h3>Gil Buffet & Congelados</h3>
+
+<p>Chef Gildesio</p>
+
+<p>WhatsApp: (61) 99928-9239</p>
+
+<div class="social">
+
+<a href="#">Instagram</a>
+<a href="#">YouTube</a>
+<a href="#">WhatsApp</a>
+
+</div>
+
+<a href="login.html" class="footer-login">Área Administrativa</a>
+
+</div>
 
 </footer>
 
-<script>
-
-function toggleMenu(){
-
-const menu = document.getElementById("menu")
-
-menu.classList.toggle("show")
-
-}
-
-</script>
+<script src="js/main.js"></script>
+<script src="js/whatsapp.js"></script>
 
 </body>
+
 </html>
