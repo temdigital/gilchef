@@ -22,11 +22,11 @@
 
 <h1>Painel do Chef</h1>
 
-<button id="logoutBtn">Sair</button>
+<button id="logoutBtn" class="btn-danger">Sair</button>
 
 </header>
 
-<div class="container">
+<div class="layout">
 
 <nav id="sidebar">
 
@@ -49,22 +49,23 @@
 
 <div class="card">
 <h3>Agenda</h3>
-<p id="totalAgenda">0 eventos</p>
+<p id="totalAgenda">0</p>
 </div>
 
 <div class="card">
 <h3>Clientes</h3>
-<p id="totalClientes">0 clientes</p>
+<p id="totalClientes">0</p>
 </div>
 
 <div class="card">
 <h3>Vídeos</h3>
-<p id="totalVideos">0 vídeos</p>
+<p id="totalVideos">0</p>
 </div>
 
 </div>
 
 </section>
+
 
 <section id="agenda" class="page">
 
@@ -75,13 +76,14 @@
 <input type="date" id="agendaData" required>
 <input type="text" id="agendaTitulo" placeholder="Evento" required>
 
-<button type="submit">Salvar</button>
+<button class="btn-primary">Salvar</button>
 
 </form>
 
-<ul id="agendaLista"></ul>
+<ul id="agendaLista" class="lista"></ul>
 
 </section>
+
 
 <section id="clientes" class="page">
 
@@ -92,33 +94,36 @@
 <input type="text" id="clienteNome" placeholder="Nome" required>
 <input type="text" id="clienteTelefone" placeholder="Telefone">
 
-<button type="submit">Salvar</button>
+<button class="btn-primary">Salvar</button>
 
 </form>
 
-<ul id="clienteLista"></ul>
+<ul id="clienteLista" class="lista"></ul>
 
 </section>
 
+
 <section id="videos" class="page">
 
-<h2>Vídeos do YouTube</h2>
+<h2>Vídeos</h2>
 
 <form id="videoForm">
 
-<input type="text" id="videoLink" placeholder="Link YouTube">
+<input type="text" id="videoLink" placeholder="Link YouTube" required>
 
-<button type="submit">Adicionar</button>
+<button class="btn-primary">Adicionar</button>
 
 </form>
 
-<div id="videoLista"></div>
+<div id="videoLista" class="video-grid"></div>
 
 </section>
 
 </main>
 
 </div>
+
+<div id="alertBox"></div>
 
 <script src="js/supabase.js"></script>
 <script src="js/dashboard.js"></script>

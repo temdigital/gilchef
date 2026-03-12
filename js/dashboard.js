@@ -1,59 +1,36 @@
-document.addEventListener("DOMContentLoaded",()=>{
+const alertBox=document.getElementById("alertBox")
 
-const sidebar=document.getElementById("sidebar")
-const toggle=document.getElementById("menuToggle")
+function alerta(msg,tipo="success"){
 
-toggle.onclick=()=>{
-sidebar.classList.toggle("active")
+const div=document.createElement("div")
+div.className="alert "+tipo
+div.innerText=msg
+
+alertBox.appendChild(div)
+
+setTimeout(()=>div.remove(),3000)
+
 }
 
-const pages=document.querySelectorAll(".page")
+document.getElementById("menuToggle").onclick=()=>{
+document.getElementById("sidebar").classList.toggle("active")
+}
 
 document.querySelectorAll("#sidebar li").forEach(btn=>{
-
 btn.onclick=()=>{
-
-pages.forEach(p=>p.classList.remove("active"))
-
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
 document.getElementById(btn.dataset.page).classList.add("active")
-
 }
-
 })
-
-verificarLogin()
-
-carregarAgenda()
-carregarClientes()
-carregarVideos()
-
-})
-
-async function verificarLogin(){
-
-const {data}=await window.supabaseClient.auth.getSession()
-
-if(!data.session){
-
-window.location="login.html"
-
-}
-
-}
 
 document.getElementById("logoutBtn").onclick=async()=>{
-
 await window.supabaseClient.auth.signOut()
-
-window.location="login.html"
-
+location="login.html"
 }
 
 async function carregarAgenda(){
 
-const {data}=await window.supabaseClient
-.from("agenda")
-.select("*")
+const {data}=await window.supabaseClient.from("agenda").select("*")
 
 const lista=document.getElementById("agendaLista")
 
@@ -64,39 +41,36 @@ data.forEach(e=>{
 const li=document.createElement("li")
 
 li.innerHTML=`
-${e.data} - ${e.titulo}
-<button onclick="excluirAgenda(${e.id})">X</button>
+${e.titulo} - ${e.data}
+<button onclick="excluirAgenda(${e.id})">Excluir</button>
 `
 
 lista.appendChild(li)
 
 })
 
-document.getElementById("totalAgenda").innerText=data.length+" eventos"
+document.getElementById("totalAgenda").innerText=data.length
 
 }
 
-document.getElementById("agendaForm").onsubmit=async(e)=>{
-
+document.getElementById("agendaForm").onsubmit=async e=>{
 e.preventDefault()
 
-const data=document.getElementById("agendaData").value
 const titulo=document.getElementById("agendaTitulo").value
+const data=document.getElementById("agendaData").value
 
-await window.supabaseClient
-.from("agenda")
-.insert([{data,titulo}])
+await window.supabaseClient.from("agenda").insert([{titulo,data}])
+
+alerta("Evento salvo")
 
 carregarAgenda()
-
 }
 
 async function excluirAgenda(id){
 
-await window.supabaseClient
-.from("agenda")
-.delete()
-.eq("id",id)
+await window.supabaseClient.from("agenda").delete().eq("id",id)
+
+alerta("Evento removido")
 
 carregarAgenda()
 
@@ -104,9 +78,7 @@ carregarAgenda()
 
 async function carregarClientes(){
 
-const {data}=await window.supabaseClient
-.from("clientes")
-.select("*")
+const {data}=await window.supabaseClient.from("clientes").select("*")
 
 const lista=document.getElementById("clienteLista")
 
@@ -118,38 +90,35 @@ const li=document.createElement("li")
 
 li.innerHTML=`
 ${c.nome} - ${c.telefone}
-<button onclick="excluirCliente(${c.id})">X</button>
+<button onclick="excluirCliente(${c.id})">Excluir</button>
 `
 
 lista.appendChild(li)
 
 })
 
-document.getElementById("totalClientes").innerText=data.length+" clientes"
+document.getElementById("totalClientes").innerText=data.length
 
 }
 
-document.getElementById("clienteForm").onsubmit=async(e)=>{
-
+document.getElementById("clienteForm").onsubmit=async e=>{
 e.preventDefault()
 
 const nome=document.getElementById("clienteNome").value
 const telefone=document.getElementById("clienteTelefone").value
 
-await window.supabaseClient
-.from("clientes")
-.insert([{nome,telefone}])
+await window.supabaseClient.from("clientes").insert([{nome,telefone}])
+
+alerta("Cliente cadastrado")
 
 carregarClientes()
-
 }
 
 async function excluirCliente(id){
 
-await window.supabaseClient
-.from("clientes")
-.delete()
-.eq("id",id)
+await window.supabaseClient.from("clientes").delete().eq("id",id)
+
+alerta("Cliente removido")
 
 carregarClientes()
 
@@ -157,9 +126,7 @@ carregarClientes()
 
 async function carregarVideos(){
 
-const {data}=await window.supabaseClient
-.from("videos")
-.select("*")
+const {data}=await window.supabaseClient.from("videos").select("*")
 
 const area=document.getElementById("videoLista")
 
@@ -175,20 +142,23 @@ area.appendChild(iframe)
 
 })
 
-document.getElementById("totalVideos").innerText=data.length+" vídeos"
+document.getElementById("totalVideos").innerText=data.length
 
 }
 
-document.getElementById("videoForm").onsubmit=async(e)=>{
-
+document.getElementById("videoForm").onsubmit=async e=>{
 e.preventDefault()
 
 const link=document.getElementById("videoLink").value
 
-await window.supabaseClient
-.from("videos")
-.insert([{link}])
+await window.supabaseClient.from("videos").insert([{link}])
+
+alerta("Vídeo adicionado")
 
 carregarVideos()
 
 }
+
+carregarAgenda()
+carregarClientes()
+carregarVideos()
