@@ -1,56 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
 <head>
 
 <meta charset="UTF-8">
-<title>Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="css/dashboard.css">
+<title>Dashboard - Gil Buffet & Congelados</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<link rel="stylesheet" href="dashboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
 <body>
 
-<div class="sidebar">
+<header class="topbar">
 
-<h2>Gil Buffet</h2>
+<button id="menuToggle">☰</button>
 
-<a href="#">Dashboard</a>
-<a href="#">Pedidos</a>
-<a href="#">Agenda</a>
-<a href="#">Marmitas</a>
+<h1>Painel do Chef</h1>
 
-</div>
+<button id="logoutBtn">Sair</button>
 
-<div class="main">
+</header>
 
-<h1>Painel Administrativo</h1>
+<div class="container">
+
+<nav id="sidebar">
+
+<ul>
+
+<li data-page="home">Dashboard</li>
+<li data-page="agenda">Agenda</li>
+<li data-page="clientes">Clientes</li>
+<li data-page="videos">Vídeos</li>
+
+</ul>
+
+</nav>
+
+<main id="content">
+
+<section id="home" class="page active">
 
 <div class="cards">
 
 <div class="card">
-<h3>Pedidos</h3>
-<p id="totalPedidos">0</p>
+<h3>Agenda</h3>
+<p id="totalAgenda">0 eventos</p>
 </div>
 
 <div class="card">
-<h3>Agendamentos</h3>
-<p id="totalAgenda">0</p>
+<h3>Clientes</h3>
+<p id="totalClientes">0 clientes</p>
 </div>
 
 <div class="card">
-<h3>Marmitas</h3>
-<p id="totalMarmitas">0</p>
+<h3>Vídeos</h3>
+<p id="totalVideos">0 vídeos</p>
 </div>
 
 </div>
 
-<h2>Últimos Pedidos</h2>
+</section>
 
-<div id="listaPedidos"></div>
+<section id="agenda" class="page">
+
+<h2>Agenda</h2>
+
+<form id="agendaForm">
+
+<input type="date" id="agendaData" required>
+<input type="text" id="agendaTitulo" placeholder="Evento" required>
+
+<button type="submit">Salvar</button>
+
+</form>
+
+<ul id="agendaLista"></ul>
+
+</section>
+
+<section id="clientes" class="page">
+
+<h2>Clientes</h2>
+
+<form id="clienteForm">
+
+<input type="text" id="clienteNome" placeholder="Nome" required>
+<input type="text" id="clienteTelefone" placeholder="Telefone">
+
+<button type="submit">Salvar</button>
+
+</form>
+
+<ul id="clienteLista"></ul>
+
+</section>
+
+<section id="videos" class="page">
+
+<h2>Vídeos do YouTube</h2>
+
+<form id="videoForm">
+
+<input type="text" id="videoLink" placeholder="Link YouTube">
+
+<button type="submit">Adicionar</button>
+
+</form>
+
+<div id="videoLista"></div>
+
+</section>
+
+</main>
 
 </div>
 
@@ -58,5 +124,4 @@
 <script src="js/dashboard.js"></script>
 
 </body>
-
 </html>
