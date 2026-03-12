@@ -1,20 +1,45 @@
-/*
-=====================================
-SUPABASE CLIENT GLOBAL
-Arquitetura segura para SaaS
-=====================================
-*/
-
 const SUPABASE_URL = "https://lsaalnektrjhrcdylbll.supabase.co"
-const SUPABASE_ANON_KEY = "sb_publishable_57YTUbwht34cT1C70Y4e5A_UBpnFnmy"
+const SUPABASE_KEY = "sb_publishable_57YTUbwht34cT1C70Y4e5A_UBpnFnmy"
 
-if (!window.supabase) {
-    console.error("Biblioteca Supabase não carregou.")
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+
+async function verificarUsuario(){
+
+const {data:{session}} = await supabase.auth.getSession()
+
+if(!session){
+
+window.location.href="login.html"
+return
+
 }
 
-window.supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-)
+const user = session.user.email
 
-console.log("Supabase conectado com sucesso")
+const {data}=await supabase
+.from("usuarios")
+.select("*")
+.eq("email",user)
+.single()
+
+if(data.role !== "admin"){
+
+document.querySelectorAll(".admin").forEach(el=>{
+
+el.style.display="none"
+
+})
+
+}
+
+}
+
+async function logout(){
+
+await supabase.auth.signOut()
+
+window.location.href="login.html"
+
+}
+
+verificarUsuario()
