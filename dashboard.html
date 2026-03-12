@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Painel Chef</title>
-
-<link rel="stylesheet" href="css/painel.css">
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-</head>
-
 <body>
 
 <header>
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<h2>Painel do Chef</h2>
+<h2>Painel Chef</h2>
+
+<button class="logout">Sair</button>
 
 </header>
 
@@ -36,6 +22,8 @@
 
 </div>
 
+<div class="overlay" onclick="fecharMenu()"></div>
+
 <main>
 
 <h2>Visão Geral</h2>
@@ -43,61 +31,25 @@
 <div class="cards">
 
 <div class="card">
-
 <h3>Clientes</h3>
 <p id="totalClientes">0</p>
-
 </div>
 
 <div class="card">
-
 <h3>Pedidos</h3>
 <p id="totalPedidos">0</p>
-
 </div>
 
 <div class="card">
-
 <h3>Marmitas</h3>
 <p id="totalMarmitas">0</p>
-
 </div>
 
 <div class="card">
-
 <h3>Agenda</h3>
 <p id="totalAgenda">0</p>
-
 </div>
 
 </div>
 
 </main>
-
-<script src="js/supabase.js"></script>
-<script src="js/menu.js"></script>
-<script src="js/alerts.js"></script>
-
-<script>
-
-async function carregarDashboard(){
-
-let {data:clientes}=await supabase.from("clientes").select("*")
-let {data:pedidos}=await supabase.from("pedidos").select("*")
-let {data:marmitas}=await supabase.from("marmitas").select("*")
-let {data:agenda}=await supabase.from("agenda").select("*")
-
-document.getElementById("totalClientes").innerText=clientes.length
-document.getElementById("totalPedidos").innerText=pedidos.length
-document.getElementById("totalMarmitas").innerText=marmitas.length
-document.getElementById("totalAgenda").innerText=agenda.length
-
-}
-
-carregarDashboard()
-
-</script>
-
-</body>
-
-</html>

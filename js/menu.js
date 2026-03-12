@@ -1,28 +1,13 @@
 function toggleMenu(){
 
 document.querySelector(".sidebar").classList.toggle("open")
+document.querySelector(".overlay").classList.toggle("show")
 
 }
 
-document.addEventListener("click", function(e){
-
-const sidebar = document.querySelector(".sidebar")
-const btn = document.querySelector(".menu-btn")
-
-if(!sidebar.contains(e.target) && !btn.contains(e.target)){
-
-sidebar.classList.remove("open")
-
-}
-
-})
-
-document.querySelectorAll(".sidebar a").forEach(link=>{
-
-link.addEventListener("click",()=>{
+function fecharMenu(){
 
 document.querySelector(".sidebar").classList.remove("open")
+document.querySelector(".overlay").classList.remove("show")
 
-})
-
-})
+}
