@@ -1,45 +1,20 @@
-const SUPABASE_URL = "https://lsaalnektrjhrcdylbll.supabase.co"
-const SUPABASE_KEY = "sb_publishable_57YTUbwht34cT1C70Y4e5A_UBpnFnmy"
+/*
+==================================================
+CONEXÃO GLOBAL COM SUPABASE
+Evita múltiplas declarações da variável supabase
+==================================================
+*/
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+const SUPABASE_URL = "https://lsaalnektrjhrcdylbll.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_57YTUbwht34cT1C70Y4e5A_UBpnFnmy";
 
-async function verificarUsuario(){
+if (!window.db) {
 
-const {data:{session}} = await supabase.auth.getSession()
+    const { createClient } = supabase;
 
-if(!session){
-
-window.location.href="login.html"
-return
-
-}
-
-const user = session.user.email
-
-const {data}=await supabase
-.from("usuarios")
-.select("*")
-.eq("email",user)
-.single()
-
-if(data.role !== "admin"){
-
-document.querySelectorAll(".admin").forEach(el=>{
-
-el.style.display="none"
-
-})
+    window.db = createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
 
 }
-
-}
-
-async function logout(){
-
-await supabase.auth.signOut()
-
-window.location.href="login.html"
-
-}
-
-verificarUsuario()

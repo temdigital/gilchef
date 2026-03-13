@@ -4,64 +4,56 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Login - Gil Buffet & Congelados</title>
+<title>Login</title>
 
 <link rel="stylesheet" href="css/login.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/login.js"></script>
 
 </head>
 
 <body>
 
-<div class="login-container">
+<div class="login-wrapper">
 
-<div class="login-image"></div>
+<div class="login-box">
 
-<div class="login-form">
+<h1>Sistema</h1>
 
-<h2>Área Administrativa</h2>
+<form id="formLogin">
 
-<form id="loginForm">
-
-<input 
-type="email" 
-id="email" 
-placeholder="Seu e-mail" 
+<input
+id="email"
+type="email"
+placeholder="Seu email"
 required
 >
 
-<input 
-type="password" 
-id="password" 
-placeholder="Sua senha" 
+<input
+id="senha"
+type="password"
+placeholder="Sua senha"
 required
 >
 
 <button type="submit">
-Entrar
-</button>
 
-<div id="loginMessage"></div>
+Entrar
+
+</button>
 
 </form>
 
-<a href="index.html" class="voltar">
-Voltar ao site
-</a>
-
 </div>
 
 </div>
-
-<!-- Biblioteca Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- Cliente Supabase -->
-<script src="js/supabase.js"></script>
-
-<!-- Login -->
-<script src="js/login.js"></script>
 
 </body>
+
 </html>

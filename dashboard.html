@@ -4,93 +4,64 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Painel Chef</title>
+<title>Dashboard</title>
 
 <link rel="stylesheet" href="css/painel.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/menu.js"></script>
+
 </head>
 
-<body>
+<body onload="verificarSessao()">
 
 <header>
 
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
+<button onclick="toggleMenu()" class="menu-btn">☰</button>
 
-<h1>Painel Chef</h1>
+<h2>Painel</h2>
 
-<button onclick="logout()" class="logout">Sair</button>
+<button onclick="logout()">Sair</button>
 
 </header>
 
-<div class="sidebar">
+<nav id="sidebar">
 
 <a href="dashboard.html">Dashboard</a>
-<a href="agenda.html">Agenda</a>
-<a href="clientes.html">Clientes</a>
-<a href="marmitas.html">Marmitas</a>
-<a href="pedidos.html">Pedidos</a>
 
-<a class="admin" href="usuarios.html">Usuários</a>
-<a class="admin" href="videos.html">Vídeos</a>
+<a href="cliente.html">Clientes</a>
 
-</div>
+<a class="admin-area" href="#">Pedidos</a>
 
-<div class="overlay" onclick="fecharMenu()"></div>
+<a class="admin-area" href="#">Agenda</a>
+
+<a class="admin-area" href="#">Cardápio</a>
+
+</nav>
 
 <main>
 
-<h2>Visão Geral</h2>
+<h1>Bem-vindo</h1>
 
 <div class="cards">
 
-<div class="card clientes">
-<h3>Clientes</h3>
-<p id="totalClientes">0</p>
-</div>
-
-<div class="card pedidos">
-<h3>Pedidos</h3>
-<p id="totalPedidos">0</p>
-</div>
-
-<div class="card marmitas">
-<h3>Marmitas</h3>
-<p id="totalMarmitas">0</p>
-</div>
-
-<div class="card agenda">
-<h3>Agenda</h3>
-<p id="totalAgenda">0</p>
-</div>
+<div class="card">Clientes</div>
+<div class="card">Pedidos</div>
+<div class="card">Agenda</div>
+<div class="card">Cardápio</div>
 
 </div>
 
 </main>
 
-<script src="js/menu.js"></script>
-<script src="js/supabase.js"></script>
-
 <script>
 
-async function carregarDashboard(){
-
-let {data:clientes}=await supabase.from("clientes").select("*")
-let {data:pedidos}=await supabase.from("pedidos").select("*")
-let {data:marmitas}=await supabase.from("marmitas").select("*")
-let {data:agenda}=await supabase.from("agenda").select("*")
-
-document.getElementById("totalClientes").innerText=clientes?.length || 0
-document.getElementById("totalPedidos").innerText=pedidos?.length || 0
-document.getElementById("totalMarmitas").innerText=marmitas?.length || 0
-document.getElementById("totalAgenda").innerText=agenda?.length || 0
-
-}
-
-carregarDashboard()
+aplicarControleAcesso()
 
 </script>
 

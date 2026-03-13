@@ -1,106 +1,57 @@
 body{
+
 margin:0;
 font-family:Arial, Helvetica, sans-serif;
-background:#111;
-color:white;
-}
-
-.login-container{
-display:flex;
+background:linear-gradient(135deg,#206500,#55c021);
 height:100vh;
-}
-
-.login-image{
-flex:1;
-background:url("https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg") center/cover;
-}
-
-.login-form{
-
-flex:1;
 display:flex;
-flex-direction:column;
-justify-content:center;
 align-items:center;
+justify-content:center;
+
+}
+
+.login-box{
+
+background:white;
 padding:40px;
-background:#1b1b1b;
-
-}
-
-.login-form h2{
-
-margin-bottom:25px;
-color:#d4af37;
-
-}
-
-.login-form input{
-
-width:260px;
-padding:12px;
-margin:10px 0;
-border-radius:6px;
-border:none;
-
-}
-
-.login-form button{
-
-width:260px;
-padding:12px;
-margin-top:10px;
-background:#d4af37;
-border:none;
-cursor:pointer;
-font-weight:bold;
-
-}
-
-.voltar{
-
-margin-top:20px;
-color:#bbb;
-text-decoration:none;
-
-}
-
-.alert{
-
-margin-top:15px;
-padding:12px;
-border-radius:6px;
-width:260px;
+border-radius:10px;
+width:320px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 text-align:center;
-font-size:14px;
 
 }
 
-.loading{
+.login-box h1{
 
-background:#333;
-
-}
-
-.error{
-
-background:#7a1c1c;
+margin-bottom:20px;
 
 }
 
-.success{
+.login-box input{
 
-background:#1c7a3a;
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border-radius:6px;
+border:1px solid #ccc;
 
 }
 
-@media(max-width:768px){
+.login-box button{
 
-.login-image{
-display:none;
+width:100%;
+padding:12px;
+border:none;
+background:#fc8901;
+color:white;
+font-weight:bold;
+border-radius:6px;
+cursor:pointer;
+
 }
 
-.login-form{
-flex:1;
-}
+.login-box button:hover{
+
+background:#aa6600;
 
 }
