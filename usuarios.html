@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Controle de Usuários</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#f5f5f5;
+}
+
+header{
+
+background:#216b39;
+color:white;
+padding:15px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.container{
+
+padding:30px;
+
+}
+
+.card{
+
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+margin-bottom:20px;
+
+}
+
+input,select{
+
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:10px;
+border:1px solid #ccc;
+border-radius:4px;
+
+}
+
+button{
+
+background:#faa011;
+border:none;
+padding:10px 14px;
+cursor:pointer;
+font-weight:bold;
+margin-right:5px;
+
+}
+
+button:hover{
+
+background:#f8d22d;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+
+}
+
+th,td{
+
+border-bottom:1px solid #ddd;
+padding:10px;
+text-align:left;
+
+}
+
+th{
+
+background:#eee;
+
+}
+
+.actions button{
+
+padding:6px 10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div>
+
+Controle de Usuários
+
+</div>
+
+<div>
+
+<button onclick="logout()">Sair</button>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h3>Cadastrar Usuário</h3>
+
+<form id="formUsuario">
+
+<label>Nome</label>
+<input type="text" id="nome" required>
+
+<label>Email</label>
+<input type="email" id="email" required>
+
+<label>WhatsApp</label>
+<input type="text" id="whatsapp">
+
+<label>Data Nascimento</label>
+<input type="date" id="data_nascimento">
+
+<label>Tipo de Usuário</label>
+
+<select id="role">
+
+<option value="cliente">Cliente</option>
+<option value="gerente">Gerente</option>
+<option value="Chef">Chef</option>
+<option value="SuperAdmin">SuperAdmin</option>
+
+</select>
+
+<button type="submit">Cadastrar</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<h3>Lista de Usuários</h3>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Nome</th>
+<th>Email</th>
+<th>WhatsApp</th>
+<th>Nascimento</th>
+<th>Perfil</th>
+<th>Ações</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tabelaUsuarios"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+/* =============================
+LOGOUT
+============================= */
+
+async function logout(){
+
+await db.auth.signOut()
+
+window.location.href="index.html"
+
+}
+
+
+/* =============================
+VERIFICAR USUARIO
+============================= */
+
+let usuarioRole = ""
+
+async function verificarUsuario(){
+
+const { data } = await db.auth.getUser()
+
+const email = data.user.email
+
+const { data:perfil } = await db
+.from("usuarios")
+.select("*")
+.eq("email",email)
+.single()
+
+usuarioRole = perfil.role
+
+carregarUsuarios()
+
+}
+
+
+/* =============================
+PERMISSÃO CADASTRO
+============================= */
+
+function podeCadastrar(roleNovo){
+
+if(usuarioRole==="SuperAdmin") return true
+
+if(usuarioRole==="Chef"){
+
+if(roleNovo==="gerente" || roleNovo==="cliente") return true
+
+}
+
+return false
+
+}
+
+
+/* =============================
+CRIAR USUARIO
+============================= */
+
+document.getElementById("formUsuario")
+.addEventListener("submit",async(e)=>{
+
+e.preventDefault()
+
+const nome = document.getElementById("nome").value
+const email = document.getElementById("email").value
+const whatsapp = document.getElementById("whatsapp").value
+const data_nascimento = document.getElementById("data_nascimento").value
+const role = document.getElementById("role").value
+
+
+if(!podeCadastrar(role)){
+
+alert("Você não tem permissão para criar esse tipo de usuário")
+return
+
+}
+
+
+const { error } = await db
+.from("usuarios")
+.insert({
+
+nome,
+email,
+whatsapp,
+data_nascimento,
+role
+
+})
+
+
+if(error){
+
+alert("Erro ao cadastrar")
+
+}else{
+
+alert("Usuário cadastrado")
+
+carregarUsuarios()
+
+}
+
+})
+
+
+/* =============================
+CARREGAR USUARIOS
+============================= */
+
+async function carregarUsuarios(){
+
+const { data } = await db
+.from("usuarios")
+.select("*")
+.order("created_at")
+
+let html=""
+
+data.forEach(u=>{
+
+html+=`
+
+<tr>
+
+<td>${u.nome}</td>
+<td>${u.email}</td>
+<td>${u.whatsapp||""}</td>
+<td>${u.data_nascimento||""}</td>
+<td>${u.role}</td>
+
+<td class="actions">
+
+<button onclick="editar('${u.id}')">Editar</button>
+<button onclick="excluir('${u.id}')">Excluir</button>
+
+</td>
+
+</tr>
+
+`
+
+})
+
+document.getElementById("tabelaUsuarios").innerHTML=html
+
+}
+
+
+/* =============================
+EXCLUIR
+============================= */
+
+async function excluir(id){
+
+if(!confirm("Deseja excluir usuário?")) return
+
+const { error } = await db
+.from("usuarios")
+.delete()
+.eq("id",id)
+
+if(error){
+
+alert("Erro ao excluir")
+
+}else{
+
+alert("Usuário removido")
+
+carregarUsuarios()
+
+}
+
+}
+
+
+/* =============================
+EDITAR
+============================= */
+
+async function editar(id){
+
+const nome = prompt("Novo nome")
+
+if(!nome) return
+
+const { error } = await db
+.from("usuarios")
+.update({nome})
+.eq("id",id)
+
+if(error){
+
+alert("Erro ao atualizar")
+
+}else{
+
+alert("Atualizado")
+
+carregarUsuarios()
+
+}
+
+}
+
+
+verificarUsuario()
+
+</script>
+
+</body>
+
+</html>
