@@ -4,67 +4,151 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Dashboard</title>
 
-<link rel="stylesheet" href="css/painel.css">
+<style>
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:#f4f4f4;
+}
+
+header{
+
+background:#216b39;
+color:white;
+padding:15px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+}
+
+.usuario-info{
+
+font-size:14px;
+
+}
+
+button{
+
+background:#faa011;
+border:none;
+padding:10px 16px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+button:hover{
+
+background:#f8d22d;
+
+}
+
+.container{
+
+padding:30px;
+
+}
+
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="js/supabase.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/menu.js"></script>
 
 </head>
 
-<body onload="verificarSessao()">
+<body>
 
 <header>
 
-<button onclick="toggleMenu()" class="menu-btn">☰</button>
+<div class="usuario-info">
 
-<h2>Painel</h2>
+Usuário: <span id="usuarioNome">Carregando...</span>  
+Perfil: <span id="usuarioRole">...</span>
+
+</div>
 
 <button onclick="logout()">Sair</button>
 
 </header>
 
-<nav id="sidebar">
+<div class="container">
 
-<a href="dashboard.html">Dashboard</a>
+<h1>Painel do Sistema</h1>
 
-<a href="cliente.html">Clientes</a>
-
-<a class="admin-area" href="#">Pedidos</a>
-
-<a class="admin-area" href="#">Agenda</a>
-
-<a class="admin-area" href="#">Cardápio</a>
-
-</nav>
-
-<main>
-
-<h1>Bem-vindo</h1>
-
-<div class="cards">
-
-<div class="card">Clientes</div>
-<div class="card">Pedidos</div>
-<div class="card">Agenda</div>
-<div class="card">Cardápio</div>
+<p>Bem vindo ao dashboard.</p>
 
 </div>
 
-</main>
 
 <script>
 
-aplicarControleAcesso()
+/* =====================================
+VERIFICAR SESSÃO
+===================================== */
+
+async function verificarSessao(){
+
+const { data } = await db.auth.getSession();
+
+if(!data.session){
+
+window.location.href="login.html";
+
+return;
+
+}
+
+carregarUsuario();
+
+}
+
+
+/* =====================================
+CARREGAR DADOS DO USUÁRIO
+===================================== */
+
+async function carregarUsuario(){
+
+const { data } = await db.auth.getUser();
+
+if(!data.user) return;
+
+const email = data.user.email;
+
+const { data:usuario } = await db
+.from("usuarios")
+.select("*")
+.eq("email",email)
+.single();
+
+
+if(usuario){
+
+document.getElementById("usuarioNome").innerText = usuario.nome;
+document.getElementById("usuarioRole").innerText = usuario.role;
+
+}
+
+}
+
+
+/* =====================================
+INICIAR DASHBOARD
+===================================== */
+
+verificarSessao();
 
 </script>
 
-</body>
 
+</body>
 </html>

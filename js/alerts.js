@@ -1,20 +1,18 @@
-function alerta(tipo, mensagem){
+/*
+=========================================
+SISTEMA DE ALERTAS GLOBAL
+Elegante e compatível com todo sistema
+=========================================
+*/
 
-const div = document.createElement("div")
+function alertaErro(msg){
 
-div.className = "alert "+tipo
+    alert(msg);
 
-div.innerText = mensagem
+}
 
-document.body.appendChild(div)
+function alertaSucesso(msg){
 
-setTimeout(()=>{
-div.classList.add("show")
-},50)
-
-setTimeout(()=>{
-div.classList.remove("show")
-setTimeout(()=>div.remove(),400)
-},3000)
+    alert(msg);
 
 }

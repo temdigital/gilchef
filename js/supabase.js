@@ -1,20 +1,19 @@
 /*
-==================================================
-CONEXÃO GLOBAL COM SUPABASE
-Evita múltiplas declarações da variável supabase
-==================================================
+========================================
+CONEXÃO GLOBAL SUPABASE
+========================================
 */
 
 const SUPABASE_URL = "https://lsaalnektrjhrcdylbll.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_57YTUbwht34cT1C70Y4e5A_UBpnFnmy";
+const SUPABASE_KEY = "sb_publishable_57YTUbwht34cT1C70Y4e5A_UBpnFnmy";
 
-if (!window.db) {
+if(!window.db){
 
-    const { createClient } = supabase;
+const { createClient } = supabase;
 
-    window.db = createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
+window.db = createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
 
 }

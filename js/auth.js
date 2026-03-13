@@ -1,107 +1,84 @@
 /*
-==================================================
-AUTENTICAÇÃO GLOBAL
-==================================================
+========================================
+AUTENTICAÇÃO DO SISTEMA
+========================================
 */
+
 
 async function login(email, senha){
 
-    try{
+try{
 
-        const { data, error } = await db.auth.signInWithPassword({
-            email: email,
-            password: senha
-        });
+const { data, error } = await db.auth.signInWithPassword({
 
-        if(error){
+email:email,
+password:senha
 
-            alertaErro("Email ou senha inválidos");
-            return;
+});
 
-        }
+if(error){
 
-        const usuarioEmail = data.user.email;
-
-        const { data:perfil } = await db
-        .from("usuarios")
-        .select("*")
-        .eq("email", usuarioEmail)
-        .single();
-
-        if(!perfil){
-
-            alertaErro("Usuário não encontrado na tabela usuarios");
-            return;
-
-        }
-
-        localStorage.setItem("usuario_nome", perfil.nome);
-        localStorage.setItem("usuario_role", perfil.role);
-
-        alertaSucesso("Login realizado");
-
-        setTimeout(()=>{
-            window.location.href="dashboard.html";
-        },600);
-
-    }
-    catch(e){
-
-        console.error(e);
-        alertaErro("Erro ao conectar com servidor");
-
-    }
+alert("Email ou senha inválidos");
+return;
 
 }
 
 
+const usuario = data.user;
 
-async function verificarSessao(){
 
-    const { data } = await db.auth.getSession();
+/* BUSCAR PERFIL NA TABELA */
 
-    if(!data.session){
+const { data:perfil } = await db
+.from("usuarios")
+.select("*")
+.eq("email",usuario.email)
+.single();
 
-        window.location.href="login.html";
 
-    }
+if(!perfil){
+
+alert("Perfil não encontrado na tabela usuarios");
+return;
 
 }
 
 
+/* SALVAR DADOS */
 
-async function logout(){
+localStorage.setItem("usuario_nome",perfil.nome);
+localStorage.setItem("usuario_role",perfil.role);
 
-    await db.auth.signOut();
 
-    localStorage.clear();
+/* REDIRECIONAR */
 
-    window.location.href="index.html";
+window.location.href="dashboard.html";
+
+}
+
+catch(e){
+
+console.error(e);
+alert("Erro ao conectar com servidor");
+
+}
 
 }
 
 
 
 /*
-==================================================
-CONTROLE DE ACESSO POR ROLE
-==================================================
+========================================
+LOGOUT
+========================================
 */
 
-function aplicarControleAcesso(){
+async function logout(){
 
-    const role = localStorage.getItem("usuario_role");
+await db.auth.signOut();
 
-    if(!role) return;
+localStorage.clear();
 
-    if(role === "cliente"){
-
-        document.querySelectorAll(".admin-area").forEach(el=>{
-
-            el.style.display="none";
-
-        });
-
-    }
+window.location.href="index.html";
 
 }
