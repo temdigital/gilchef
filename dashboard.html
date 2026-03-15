@@ -4,151 +4,85 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Dashboard</title>
 
-<style>
-
-body{
-font-family: Arial, Helvetica, sans-serif;
-margin:0;
-background:#f4f4f4;
-}
-
-header{
-
-background:#216b39;
-color:white;
-padding:15px;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-}
-
-.usuario-info{
-
-font-size:14px;
-
-}
-
-button{
-
-background:#faa011;
-border:none;
-padding:10px 16px;
-cursor:pointer;
-font-weight:bold;
-
-}
-
-button:hover{
-
-background:#f8d22d;
-
-}
-
-.container{
-
-padding:30px;
-
-}
-
-</style>
+<link rel="stylesheet" href="css/painel.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="js/supabase.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/admin.js"></script>
 
 </head>
 
 <body>
 
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<h2>Sistema</h2>
+
+<a href="dashboard.html">Dashboard</a>
+<a href="usuarios.html">Usuários</a>
+<a href="pedidos.html">Pedidos</a>
+<a href="relatorios.html">Relatórios</a>
+<a href="config.html">Configurações</a>
+
+</aside>
+
+<div id="overlay"></div>
+
+<div class="content">
+
 <header>
 
-<div class="usuario-info">
+<button class="hamburger">☰</button>
 
-Usuário: <span id="usuarioNome">Carregando...</span>  
-Perfil: <span id="usuarioRole">...</span>
+<div class="user">
+
+<span id="usuarioInfo"></span>
+
+<button class="logout" onclick="logout()">Sair</button>
 
 </div>
-
-<button onclick="logout()">Sair</button>
 
 </header>
 
-<div class="container">
+<main>
 
 <h1>Painel do Sistema</h1>
 
-<p>Bem vindo ao dashboard.</p>
+<div class="cards">
+
+<div class="card">
+
+<h3>Pedidos</h3>
+
+<p id="cardPedidos">0</p>
 
 </div>
 
+<div class="card">
 
-<script>
+<h3>Usuários</h3>
 
-/* =====================================
-VERIFICAR SESSÃO
-===================================== */
+<p id="cardUsuarios">0</p>
 
-async function verificarSessao(){
+</div>
 
-const { data } = await db.auth.getSession();
+</div>
 
-if(!data.session){
+</main>
 
-window.location.href="login.html";
+</div>
 
-return;
-
-}
-
-carregarUsuario();
-
-}
-
-
-/* =====================================
-CARREGAR DADOS DO USUÁRIO
-===================================== */
-
-async function carregarUsuario(){
-
-const { data } = await db.auth.getUser();
-
-if(!data.user) return;
-
-const email = data.user.email;
-
-const { data:usuario } = await db
-.from("usuarios")
-.select("*")
-.eq("email",email)
-.single();
-
-
-if(usuario){
-
-document.getElementById("usuarioNome").innerText = usuario.nome;
-document.getElementById("usuarioRole").innerText = usuario.role;
-
-}
-
-}
-
-
-/* =====================================
-INICIAR DASHBOARD
-===================================== */
-
-verificarSessao();
-
-</script>
-
+</div>
 
 </body>
+
 </html>

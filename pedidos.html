@@ -14,7 +14,7 @@
 
 <script src="js/supabase.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/painel.js"></script>
+<script src="js/admin.js"></script>
 <script src="js/pedidos.js"></script>
 
 </head>
@@ -25,11 +25,13 @@
 
 <aside class="sidebar">
 
-<h2>Painel</h2>
+<h2>Sistema</h2>
 
 <a href="dashboard.html">Dashboard</a>
 <a href="usuarios.html">Usuários</a>
 <a href="pedidos.html">Pedidos</a>
+<a href="relatorios.html">Relatórios</a>
+<a href="config.html">Configurações</a>
 
 </aside>
 
@@ -43,7 +45,7 @@
 
 <div class="user">
 
-<span id="usuarioNome"></span>
+<span id="usuarioInfo"></span>
 
 <button class="logout" onclick="logout()">Sair</button>
 
@@ -51,20 +53,38 @@
 
 </header>
 
-<div style="padding:30px">
+<main>
 
 <h1>Pedidos</h1>
+
+<form id="formPedido">
+
+<input type="text" id="cliente" placeholder="Cliente">
+<input type="text" id="telefone" placeholder="Telefone">
+
+<select id="status">
+
+<option>novo</option>
+<option>preparando</option>
+<option>saiu_entrega</option>
+<option>entregue</option>
+<option>cancelado</option>
+
+</select>
+
+<button type="submit">Salvar</button>
+
+</form>
 
 <table>
 
 <thead>
 
 <tr>
-
 <th>Cliente</th>
 <th>Telefone</th>
 <th>Status</th>
-
+<th>Ações</th>
 </tr>
 
 </thead>
@@ -73,7 +93,7 @@
 
 </table>
 
-</div>
+</main>
 
 </div>
 
