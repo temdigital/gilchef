@@ -1,36 +1,67 @@
-<div class="container py-4">
+<!DOCTYPE html>
+<html lang="pt-br">
 
-<h2 class="mb-4">Clientes</h2>
+<head>
 
-<div class="card shadow p-3 mb-4">
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Clientes</title>
+
+<link rel="stylesheet" href="css/admin.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/clientes.js"></script>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h3>Sistema</h3>
+
+<a href="dashboard.html">Dashboard</a>
+
+<a id="menuClientes" href="clientes.html">Clientes</a>
+
+<a id="menuUsuarios" href="usuarios.html">Usuários</a>
+
+<a href="pedidos.html">Pedidos</a>
+
+<a href="agenda.html">Agenda</a>
+
+</div>
+
+<div class="topbar">
+
+<span id="usuarioInfo"></span>
+
+<button onclick="logout()" class="btn">Sair</button>
+
+</div>
+
+<div class="content">
+
+<h2>Clientes</h2>
+
+<div class="form-box">
 
 <form id="formCliente">
 
-<div class="row g-3">
+<div class="form-row">
 
-<div class="col-md-4">
+<input id="nome" placeholder="Nome">
 
-<input class="form-control" id="nome" placeholder="Nome">
+<input id="telefone" placeholder="Telefone">
 
-</div>
+<input id="email" placeholder="Email">
 
-<div class="col-md-3">
-
-<input class="form-control" id="telefone" placeholder="Telefone">
-
-</div>
-
-<div class="col-md-3">
-
-<input class="form-control" id="email" placeholder="Email">
-
-</div>
-
-<div class="col-md-2">
-
-<button class="btn btn-warning w-100">Salvar</button>
-
-</div>
+<button class="btn">Salvar</button>
 
 </div>
 
@@ -38,7 +69,7 @@
 
 </div>
 
-<table class="table table-striped">
+<table>
 
 <thead>
 
@@ -58,3 +89,6 @@
 </table>
 
 </div>
+
+</body>
+</html>
