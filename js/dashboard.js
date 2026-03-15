@@ -1,164 +1,45 @@
-const alertBox=document.getElementById("alertBox")
+document.addEventListener("DOMContentLoaded",()=>{
 
-function alerta(msg,tipo="success"){
-
-const div=document.createElement("div")
-div.className="alert "+tipo
-div.innerText=msg
-
-alertBox.appendChild(div)
-
-setTimeout(()=>div.remove(),3000)
-
-}
-
-document.getElementById("menuToggle").onclick=()=>{
-document.getElementById("sidebar").classList.toggle("active")
-}
-
-document.querySelectorAll("#sidebar li").forEach(btn=>{
-btn.onclick=()=>{
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
-document.getElementById(btn.dataset.page).classList.add("active")
-}
-})
-
-document.getElementById("logoutBtn").onclick=async()=>{
-await window.supabaseClient.auth.signOut()
-location="login.html"
-}
-
-async function carregarAgenda(){
-
-const {data}=await window.supabaseClient.from("agenda").select("*")
-
-const lista=document.getElementById("agendaLista")
-
-lista.innerHTML=""
-
-data.forEach(e=>{
-
-const li=document.createElement("li")
-
-li.innerHTML=`
-${e.titulo} - ${e.data}
-<button onclick="excluirAgenda(${e.id})">Excluir</button>
-`
-
-lista.appendChild(li)
+carregarUsuario()
+carregarCards()
 
 })
 
-document.getElementById("totalAgenda").innerText=data.length
+async function carregarUsuario(){
+
+const { data } = await db.auth.getUser()
+
+if(!data.user){
+
+window.location.href="login.html"
+return
 
 }
 
-document.getElementById("agendaForm").onsubmit=async e=>{
-e.preventDefault()
+const email=data.user.email
 
-const titulo=document.getElementById("agendaTitulo").value
-const data=document.getElementById("agendaData").value
+const { data:usuario } = await db
+.from("usuarios")
+.select("*")
+.eq("email",email)
+.single()
 
-await window.supabaseClient.from("agenda").insert([{titulo,data}])
-
-alerta("Evento salvo")
-
-carregarAgenda()
-}
-
-async function excluirAgenda(id){
-
-await window.supabaseClient.from("agenda").delete().eq("id",id)
-
-alerta("Evento removido")
-
-carregarAgenda()
+document.getElementById("usuarioNome").innerText=usuario.nome
 
 }
 
-async function carregarClientes(){
+async function carregarCards(){
 
-const {data}=await window.supabaseClient.from("clientes").select("*")
+const {count:pedidos}=await db
+.from("pedidos")
+.select("*",{count:"exact",head:true})
 
-const lista=document.getElementById("clienteLista")
+document.getElementById("cardPedidos").innerText=pedidos
 
-lista.innerHTML=""
+const {count:usuarios}=await db
+.from("usuarios")
+.select("*",{count:"exact",head:true})
 
-data.forEach(c=>{
-
-const li=document.createElement("li")
-
-li.innerHTML=`
-${c.nome} - ${c.telefone}
-<button onclick="excluirCliente(${c.id})">Excluir</button>
-`
-
-lista.appendChild(li)
-
-})
-
-document.getElementById("totalClientes").innerText=data.length
+document.getElementById("cardUsuarios").innerText=usuarios
 
 }
-
-document.getElementById("clienteForm").onsubmit=async e=>{
-e.preventDefault()
-
-const nome=document.getElementById("clienteNome").value
-const telefone=document.getElementById("clienteTelefone").value
-
-await window.supabaseClient.from("clientes").insert([{nome,telefone}])
-
-alerta("Cliente cadastrado")
-
-carregarClientes()
-}
-
-async function excluirCliente(id){
-
-await window.supabaseClient.from("clientes").delete().eq("id",id)
-
-alerta("Cliente removido")
-
-carregarClientes()
-
-}
-
-async function carregarVideos(){
-
-const {data}=await window.supabaseClient.from("videos").select("*")
-
-const area=document.getElementById("videoLista")
-
-area.innerHTML=""
-
-data.forEach(v=>{
-
-const iframe=document.createElement("iframe")
-
-iframe.src=v.link.replace("watch?v=","embed/")
-
-area.appendChild(iframe)
-
-})
-
-document.getElementById("totalVideos").innerText=data.length
-
-}
-
-document.getElementById("videoForm").onsubmit=async e=>{
-e.preventDefault()
-
-const link=document.getElementById("videoLink").value
-
-await window.supabaseClient.from("videos").insert([{link}])
-
-alerta("Vídeo adicionado")
-
-carregarVideos()
-
-}
-
-carregarAgenda()
-carregarClientes()
-carregarVideos()

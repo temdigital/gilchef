@@ -1,22 +1,33 @@
-async function criarPedido(){
+document.addEventListener("DOMContentLoaded",()=>{
 
-const cliente =
-document.getElementById("cliente").value
-
-const telefone =
-document.getElementById("telefone").value
-
-const produto =
-document.getElementById("produto").value
-
-await supabase.from("pedidos").insert({
-
-cliente:cliente,
-telefone:telefone,
-produto:produto
+carregarPedidos()
 
 })
 
-alert("Pedido enviado!")
+async function carregarPedidos(){
+
+const {data}=await db
+.from("pedidos")
+.select("*")
+
+let html=""
+
+data.forEach(p=>{
+
+html+=`
+
+<tr>
+
+<td>${p.cliente}</td>
+<td>${p.telefone}</td>
+<td>${p.status}</td>
+
+</tr>
+
+`
+
+})
+
+document.getElementById("listaPedidos").innerHTML=html
 
 }
