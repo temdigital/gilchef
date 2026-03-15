@@ -1,13 +1,41 @@
-function toggleMenu(){
+document.addEventListener("DOMContentLoaded", iniciarMenu)
 
-document.querySelector(".sidebar").classList.toggle("open")
-document.querySelector(".overlay").classList.toggle("show")
+async function iniciarMenu(){
+
+const { data } = await db.auth.getUser()
+
+if(!data.user){
+
+window.location="login.html"
+return
 
 }
 
-function fecharMenu(){
+const email=data.user.email
 
-document.querySelector(".sidebar").classList.remove("open")
-document.querySelector(".overlay").classList.remove("show")
+const { data:usuario } = await db
+.from("usuarios")
+.select("*")
+.eq("email",email)
+.single()
+
+document.getElementById("usuarioInfo").innerText=
+`Usuário: ${usuario.nome} | Perfil: ${usuario.role}`
+
+/* CONTROLE MENU */
+
+if(usuario.role!="SuperAdmin" && usuario.role!="Chef"){
+
+const menuUsuarios=document.getElementById("menuUsuarios")
+if(menuUsuarios) menuUsuarios.style.display="none"
+
+}
+
+if(usuario.role!="SuperAdmin"){
+
+const menuClientes=document.getElementById("menuClientes")
+if(menuClientes) menuClientes.style.display="none"
+
+}
 
 }

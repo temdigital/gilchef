@@ -1,34 +1,8 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", carregarDashboard)
 
-carregarUsuario()
-carregarCards()
+async function carregarDashboard(){
 
-})
-
-async function carregarUsuario(){
-
-const { data } = await db.auth.getUser()
-
-if(!data.user){
-
-window.location.href="login.html"
-return
-
-}
-
-const email=data.user.email
-
-const { data:usuario } = await db
-.from("usuarios")
-.select("*")
-.eq("email",email)
-.single()
-
-document.getElementById("usuarioNome").innerText=usuario.nome
-
-}
-
-async function carregarCards(){
+/* TOTAL PEDIDOS */
 
 const {count:pedidos}=await db
 .from("pedidos")
@@ -36,10 +10,29 @@ const {count:pedidos}=await db
 
 document.getElementById("cardPedidos").innerText=pedidos
 
+/* PEDIDOS PREPARO */
+
+const {count:preparo}=await db
+.from("pedidos")
+.select("*",{count:"exact",head:true})
+.eq("status","preparando")
+
+document.getElementById("cardPreparo").innerText=preparo
+
+/* USUÁRIOS */
+
 const {count:usuarios}=await db
 .from("usuarios")
 .select("*",{count:"exact",head:true})
 
 document.getElementById("cardUsuarios").innerText=usuarios
+
+/* AGENDA */
+
+const {count:agenda}=await db
+.from("agenda")
+.select("*",{count:"exact",head:true})
+
+document.getElementById("cardAgenda").innerText=agenda
 
 }

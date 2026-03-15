@@ -1,38 +1,60 @@
-<!DOCTYPE html>
-<html>
+<div class="container py-4">
 
-<head>
+<h2 class="mb-4">Clientes</h2>
 
-<meta charset="UTF-8">
-<title>Pedidos</title>
+<div class="card shadow p-3 mb-4">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<form id="formCliente">
 
-</head>
+<div class="row g-3">
 
-<body>
+<div class="col-md-4">
 
-<h2>Fazer Pedido</h2>
+<input class="form-control" id="nome" placeholder="Nome">
 
-<input id="cliente" placeholder="Nome">
+</div>
 
-<input id="telefone" placeholder="Telefone">
+<div class="col-md-3">
 
-<select id="produto">
+<input class="form-control" id="telefone" placeholder="Telefone">
 
-<option>Frango Fit</option>
-<option>Carne com Legumes</option>
-<option>Vegetariana</option>
+</div>
 
-</select>
+<div class="col-md-3">
 
-<button onclick="criarPedido()">
-Enviar Pedido
-</button>
+<input class="form-control" id="email" placeholder="Email">
 
-<script src="js/supabase.js"></script>
-<script src="js/pedidos.js"></script>
+</div>
 
-</body>
+<div class="col-md-2">
 
-</html>
+<button class="btn btn-warning w-100">Salvar</button>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+<table class="table table-striped">
+
+<thead>
+
+<tr>
+
+<th>Nome</th>
+<th>Telefone</th>
+<th>Email</th>
+<th>Ações</th>
+
+</tr>
+
+</thead>
+
+<tbody id="listaClientes"></tbody>
+
+</table>
+
+</div>
