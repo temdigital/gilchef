@@ -1,0 +1,43 @@
+body{
+
+background:#f4f4f4;
+
+}
+
+.sidebar{
+
+width:220px;
+min-height:100vh;
+background:#206500;
+
+display:flex;
+flex-direction:column;
+
+}
+
+.sidebar a{
+
+color:white;
+text-decoration:none;
+padding:12px 10px;
+
+}
+
+.sidebar a:hover{
+
+background:#55c021;
+
+}
+
+.card{
+
+border-left:5px solid #fc8901;
+
+}
+
+.btn-warning{
+
+background:#fc8901;
+border:none;
+
+}
