@@ -252,12 +252,46 @@ async function loadProfile() {
   }
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const output = {};
-    ['nome','nome_exibicao','whatsapp','cidade','biografia','preferencias_alimentares','alergias','restricoes','endereco','instagram','facebook','tiktok','kwai','outro_link'].forEach((key) => { output[key] = form.elements[key]?.value || null; });
-    if (profile.tipo_usuario === 'cliente') output.data_nascimento = `${form.elements.nascimento_ano.value}-${form.elements.nascimento_mes.value}-${form.elements.nascimento_dia.value}`;
-    const c = await client();
-    const { error } = await c.from('usuarios').update(output).eq('id', profile.id);
-    form.querySelector('.form-message').textContent = error ? error.message : 'Perfil atualizado com sucesso.';
+    const message = form.querySelector('.form-message');
+    const button = form.querySelector('[type="submit"]');
+
+    try {
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        throw new Error('Revise os campos obrigatórios antes de salvar.');
+      }
+
+      const output = {};
+      ['nome','nome_exibicao','whatsapp','cidade','biografia','preferencias_alimentares','alergias','restricoes','endereco','instagram','facebook','tiktok','kwai','outro_link'].forEach((key) => {
+        output[key] = form.elements[key]?.value?.trim() || null;
+      });
+
+      if (profile.tipo_usuario === 'cliente') {
+        const year = form.elements.nascimento_ano.value;
+        const month = form.elements.nascimento_mes.value;
+        const day = form.elements.nascimento_dia.value;
+        if (!year || !month || !day) throw new Error('Informe a data de nascimento completa.');
+        output.data_nascimento = `${year}-${month}-${day}`;
+      }
+
+      button.disabled = true;
+      button.textContent = 'Salvando…';
+      message.textContent = 'Atualizando suas informações…';
+      message.className = 'form-message';
+
+      const c = await client();
+      const { error } = await c.from('usuarios').update(output).eq('id', profile.id);
+      if (error) throw error;
+
+      message.textContent = 'Perfil atualizado com sucesso.';
+      message.className = 'form-message success';
+    } catch (error) {
+      message.textContent = error.message || 'Não foi possível atualizar o perfil.';
+      message.className = 'form-message error';
+    } finally {
+      button.disabled = false;
+      button.textContent = 'Salvar alterações';
+    }
   });
 }
 

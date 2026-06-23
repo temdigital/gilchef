@@ -21,6 +21,7 @@
     const month = Number(form.mes.value);
     const day = Number(form.dia.value);
     const date = new Date(year, month - 1, day, 12, 0, 0);
+
     if (
       !year || !month || !day ||
       date.getFullYear() !== year ||
@@ -29,11 +30,30 @@
     ) {
       throw new Error('Informe uma data de nascimento válida.');
     }
+
     const limit = new Date();
     limit.setHours(23, 59, 59, 999);
     limit.setFullYear(limit.getFullYear() - 18);
     if (date > limit) throw new Error('É necessário ter 18 anos ou mais.');
+
     return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  }
+
+  function showSuccess(email) {
+    const dialog = document.querySelector('#cadastro-sucesso');
+    if (!dialog) return;
+
+    dialog.querySelector('[data-success-email]').textContent = email;
+    const loginLink = dialog.querySelector('[data-success-login]');
+    loginLink.href = `${GilApp.url('login.html')}?cadastro=sucesso&email=${encodeURIComponent(email)}`;
+
+    dialog.querySelector('[data-success-close]').onclick = () => dialog.close();
+
+    if (typeof dialog.showModal === 'function') {
+      dialog.showModal();
+    } else {
+      dialog.setAttribute('open', '');
+    }
   }
 
   async function loadInvite(form) {
@@ -79,30 +99,46 @@
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const button = form.querySelector('button[type="submit"]');
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        setMessage(form, 'Revise os campos obrigatórios antes de continuar.', 'error');
+        return;
+      }
+
       try {
         if (!state.conviteValido) throw new Error('Este convite não pode ser utilizado.');
         if (form.senha.value !== form.confirmar.value) throw new Error('As senhas não coincidem.');
+
         const isClient = !state.convite || state.convite.tipo_usuario === 'cliente';
         const birth = isClient ? parseBirth(form) : null;
+        const email = form.email.value.trim();
 
         button.disabled = true;
-        setMessage(form, 'Criando cadastro…');
+        button.textContent = 'Criando cadastro…';
+        setMessage(form, 'Protegendo seus dados e criando sua conta…');
+
         await GilAuth.signUp({
           nome: form.nome.value.trim(),
           nome_exibicao: form.nome_exibicao.value.trim(),
-          email: form.email.value.trim(),
+          email,
           whatsapp: form.whatsapp.value,
           cidade: form.cidade.value.trim(),
           data_nascimento: birth,
           senha: form.senha.value,
           convite_token: state.convite?.token || null
         });
-        setMessage(form, 'Cadastro criado. Verifique seu e-mail para confirmar a conta e depois entre.', 'success');
+
+        setMessage(form, 'Cadastro criado com sucesso. Confirme sua conta pelo e-mail enviado.', 'success');
         form.reset();
+        showSuccess(email);
       } catch (error) {
         setMessage(form, error.message || 'Não foi possível criar o cadastro.', 'error');
       } finally {
-        if (state.conviteValido) button.disabled = false;
+        if (state.conviteValido) {
+          button.disabled = false;
+          button.textContent = 'Criar cadastro';
+        }
       }
     });
   });

@@ -1,40 +1,97 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head>
-<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="#151511" name="theme-color"/><meta content="noindex,nofollow" name="robots"/>
-<title>Entrar | Gil Personal Chef</title>
-<link href="assets/img/oficiais/favicon.png" rel="icon"/>
-<link href="assets/css/site.css" rel="stylesheet"/><link href="assets/css/auth.css" rel="stylesheet"/>
-</head><body class="auth-body"><main class="auth-shell"><section class="auth-brand">
-<a aria-label="Gil Personal Chef — início" class="brand" href="index.html"><img alt="" class="brand-mark" src="assets/img/oficiais/logo-simbolo.webp"/><span class="brand-name"><strong>Gil</strong><small>Personal Chef</small></span></a>
-<span class="eyebrow">Alta Gastronomia com Sabor Caseiro</span>
-<h1>Seu atendimento, organizado em um só lugar.</h1><p>Acesse pedidos, reservas, favoritos e informações da sua experiência.</p><a class="text-link" href="index.html">← Voltar ao site</a>
-</section><section class="auth-card"><div><span class="eyebrow">Área restrita</span><h2>Entrar</h2></div>
-<form class="form-stack" id="login-form">
-<label>E-mail<input autocomplete="email" name="email" required="" type="email"/></label>
-<label>Senha<input autocomplete="current-password" minlength="8" name="senha" required="" type="password"/></label>
-<button class="btn btn-primary" type="submit">Entrar</button>
-<p aria-live="polite" class="form-message"></p>
-</form>
-<div class="auth-links"><a href="recuperar-senha.html">Esqueci minha senha</a><a href="cadastro.html">Criar cadastro</a></div></section></main>
-<script src="assets/vendor/supabase.min.js"></script><script src="assets/js/supabase-config.js"></script>
-<script src="assets/js/config.js"></script><script src="assets/js/app.js"></script><script src="assets/js/auth.js"></script>
-<script>
-document.querySelector('#login-form').addEventListener('submit', async (event) => {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const message = form.querySelector('.form-message');
-  const button = form.querySelector('button');
-  try {
-    button.disabled = true;
-    message.textContent = 'Autenticando…';
-    await GilAuth.signIn(form.email.value, form.senha.value);
-    const retorno = new URLSearchParams(location.search).get('retorno');
-    location.href = retorno && retorno.startsWith('/') ? retorno : GilApp.url('dashboard/index.html');
-  } catch (error) {
-    message.textContent = error.message || 'Não foi possível entrar.';
-  } finally {
-    button.disabled = false;
-  }
-});
-</script></body></html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#151511" name="theme-color"/>
+  <meta content="noindex,nofollow" name="robots"/>
+  <title>Entrar | Gil Personal Chef</title>
+  <link href="assets/img/oficiais/favicon.png" rel="icon"/>
+  <link href="assets/css/site.css" rel="stylesheet"/>
+  <link href="assets/css/auth.css" rel="stylesheet"/>
+</head>
+<body class="auth-body auth-login">
+  <main class="auth-shell">
+    <section class="auth-brand" aria-label="Apresentação Gil Personal Chef">
+      <a aria-label="Gil Personal Chef — início" class="brand" href="index.html">
+        <img alt="Símbolo Gil Personal Chef" class="brand-mark" src="assets/img/oficiais/logo-simbolo.webp"/>
+        <span class="brand-name"><strong>Gil</strong><small>Personal Chef</small></span>
+      </a>
+      <span class="eyebrow">Alta Gastronomia com Sabor Caseiro</span>
+      <h1>Seu atendimento, organizado em um só lugar.</h1>
+      <p>Acesse pedidos, reservas, favoritos e todas as informações da sua experiência com o Chef Gil.</p>
+      <a class="text-link" href="index.html">← Voltar ao site</a>
+    </section>
+
+    <section class="auth-card" aria-labelledby="login-title">
+      <header class="auth-card-head">
+        <span class="eyebrow">Área restrita</span>
+        <h2 id="login-title">Entrar</h2>
+        <p>Use o e-mail e a senha cadastrados para acessar seu painel privado.</p>
+      </header>
+
+      <p class="notice success auth-context" data-login-notice hidden></p>
+
+      <form class="form-stack" id="login-form" novalidate>
+        <label>
+          E-mail
+          <input autocomplete="email" name="email" placeholder="seuemail@exemplo.com" required type="email"/>
+        </label>
+        <label>
+          Senha
+          <input autocomplete="current-password" minlength="8" name="senha" placeholder="Digite sua senha" required type="password"/>
+        </label>
+        <button class="btn btn-primary" type="submit">Entrar</button>
+        <p aria-live="polite" class="form-message"></p>
+      </form>
+
+      <div class="auth-links">
+        <a href="recuperar-senha.html">Esqueci minha senha</a>
+        <a href="cadastro.html">Criar cadastro</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/vendor/supabase.min.js"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(location.search);
+      const notice = document.querySelector('[data-login-notice]');
+      const email = params.get('email');
+
+      if (params.get('cadastro') === 'sucesso') {
+        notice.hidden = false;
+        notice.textContent = email
+          ? `Cadastro concluído. Confirme a mensagem enviada para ${email} antes de entrar.`
+          : 'Cadastro concluído. Confirme a mensagem enviada ao seu e-mail antes de entrar.';
+      }
+
+      const form = document.querySelector('#login-form');
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const message = form.querySelector('.form-message');
+        const button = form.querySelector('button');
+        try {
+          button.disabled = true;
+          button.textContent = 'Entrando…';
+          message.textContent = 'Verificando seus dados…';
+          message.className = 'form-message';
+          await GilAuth.signIn(form.email.value, form.senha.value);
+          const retorno = new URLSearchParams(location.search).get('retorno');
+          location.href = retorno && retorno.startsWith('/') ? retorno : GilApp.url('dashboard/index.html');
+        } catch (error) {
+          message.textContent = error.message || 'Não foi possível entrar.';
+          message.className = 'form-message error';
+        } finally {
+          button.disabled = false;
+          button.textContent = 'Entrar';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

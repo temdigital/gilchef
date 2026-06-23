@@ -20,6 +20,32 @@ function clearLoginFailures() {
   localStorage.removeItem(LOGIN_LOCK_KEY);
 }
 
+function friendlyAuthError(error) {
+  const code = String(error?.code || '').toLowerCase();
+  const message = String(error?.message || '').toLowerCase();
+
+  if (code === 'invalid_credentials' || message.includes('invalid login credentials')) {
+    return new Error('E-mail ou senha incorretos. Revise os dados e tente novamente.');
+  }
+  if (code === 'email_not_confirmed' || message.includes('email not confirmed')) {
+    return new Error('Seu e-mail ainda não foi confirmado. Abra a mensagem enviada pelo Gil Personal Chef e clique no link de confirmação.');
+  }
+  if (code === 'user_already_exists' || message.includes('user already registered') || message.includes('already registered')) {
+    return new Error('Este e-mail já possui cadastro. Entre com sua senha ou use a recuperação de acesso.');
+  }
+  if (code === 'weak_password' || message.includes('password should be')) {
+    return new Error('Crie uma senha mais segura, com pelo menos 8 caracteres.');
+  }
+  if (message.includes('rate limit') || message.includes('too many requests')) {
+    return new Error('Muitas tentativas em sequência. Aguarde alguns instantes e tente novamente.');
+  }
+  if (message.includes('network') || message.includes('failed to fetch')) {
+    return new Error('Não foi possível conectar ao serviço. Verifique sua internet e tente novamente.');
+  }
+
+  return error instanceof Error ? error : new Error('Não foi possível concluir a autenticação.');
+}
+
 async function signIn(email, password) {
   const remaining = loginLockRemaining();
   if (remaining > 0) {
@@ -30,7 +56,7 @@ async function signIn(email, password) {
   const { data, error } = await client.auth.signInWithPassword({ email, password });
   if (error) {
     recordLoginFailure();
-    throw error;
+    throw friendlyAuthError(error);
   }
 
   clearLoginFailures();
@@ -68,7 +94,7 @@ async function signUp(payload) {
       }
     }
   });
-  if (error) throw error;
+  if (error) throw friendlyAuthError(error);
   return data;
 }
 
@@ -76,13 +102,13 @@ async function resetPassword(email) {
   const client = await GilApp.getClient();
   const redirectTo = new URL(GilApp.url('redefinir-senha.html'), location.origin).href;
   const { error } = await client.auth.resetPasswordForEmail(email, { redirectTo });
-  if (error) throw error;
+  if (error) throw friendlyAuthError(error);
 }
 
 async function updatePassword(password) {
   const client = await GilApp.getClient();
   const { error } = await client.auth.updateUser({ password });
-  if (error) throw error;
+  if (error) throw friendlyAuthError(error);
 }
 
 async function currentProfile() {
@@ -118,4 +144,13 @@ async function logout() {
   location.href = GilApp.url('login.html');
 }
 
-window.GilAuth = { signIn, signUp, resetPassword, updatePassword, currentProfile, requireAuth, logout };
+window.GilAuth = {
+  signIn,
+  signUp,
+  resetPassword,
+  updatePassword,
+  currentProfile,
+  requireAuth,
+  logout,
+  friendlyAuthError
+};
