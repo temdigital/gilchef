@@ -140,8 +140,11 @@ async function requireAuth() {
 
 async function logout() {
   const client = await GilApp.getClient();
-  await client.auth.signOut();
-  location.href = GilApp.url('login.html');
+  try {
+    await client.auth.signOut();
+  } finally {
+    location.replace(GilApp.url('index.html'));
+  }
 }
 
 window.GilAuth = {
