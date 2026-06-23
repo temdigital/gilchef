@@ -4,6 +4,6 @@
  * Nunca coloque secret key/service_role neste arquivo.
  */
 window.GIL_SUPABASE_CONFIG = Object.freeze({
-  url: 'COLE_AQUI_A_URL_DO_SUPABASE',
-  key: 'COLE_AQUI_A_CHAVE_PUBLICA_DO_SUPABASE'
+  url: 'https://ayygumxbolnwepchuigw.supabase.co',
+  key: 'sb_publishable_s4Kovu5xkE7oPfE6NCJN7A_YkqilzjO'
 });
