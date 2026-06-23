@@ -4,3 +4,79 @@
 @media(max-width:620px){:root{--container:min(100% - 28px,1180px)}.brand-mark{width:56px!important}.brand-name strong{font-size:1.65rem}.hero{min-height:650px}.hero-content{padding:90px 0 70px}.section{padding:70px 0}.grid-3,.grid-2,.form-grid{grid-template-columns:1fr}.field-full{grid-column:auto}.section-head{align-items:flex-start;flex-direction:column}.trust-row{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column}.cta-band{padding:32px}.whatsapp-float{left:14px;right:14px;text-align:center}}
 
 .hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,9,7,.88) 0%,rgba(10,9,7,.58) 42%,rgba(10,9,7,.08) 78%);z-index:0}.hero{position:relative;background-image:url('../img/oficiais/chef-gil-hero.webp')}.hero-content{position:relative;z-index:1}.site-header .brand{min-width:max-content}.section-photo{object-fit:cover;max-height:720px;width:100%}.card-media[src*="oficiais"]{object-position:center}.brand-name{white-space:nowrap}@media(max-width:440px){.brand-name small{letter-spacing:.12em}.site-header .brand-name strong{font-size:1.45rem}.site-header .brand-mark{width:48px!important}.nav-wrap{min-height:72px}}
+
+/* ==========================================================
+   CAPA RESPONSIVA — PRIORIDADE PARA SMARTPHONES
+   Mantém o Chef Gil visível em telas estreitas e preserva a
+   legibilidade do conteúdo sem trocar a fotografia oficial.
+   ========================================================== */
+.hero{
+  min-height:clamp(680px,78vh,840px);
+  overflow:hidden;
+  isolation:isolate;
+  background-color:#17130f;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:58% 38%;
+}
+.hero:before{
+  background:
+    linear-gradient(90deg,rgba(10,9,7,.92) 0%,rgba(10,9,7,.68) 40%,rgba(10,9,7,.14) 76%),
+    linear-gradient(0deg,rgba(10,9,7,.52) 0%,rgba(10,9,7,0) 48%);
+}
+
+@media(max-width:620px){
+  .hero{
+    min-height:760px;
+    align-items:end;
+    background-position:55% center;
+  }
+  .hero:before{
+    background:linear-gradient(180deg,
+      rgba(10,9,7,.04) 0%,
+      rgba(10,9,7,.08) 30%,
+      rgba(10,9,7,.48) 58%,
+      rgba(10,9,7,.94) 80%,
+      rgba(10,9,7,.98) 100%);
+  }
+  .hero-content{
+    width:100%;
+    max-width:none;
+    padding:390px 0 42px;
+  }
+  .hero h1{
+    max-width:12ch;
+    font-size:clamp(2.55rem,12vw,3.7rem);
+    line-height:1.01;
+  }
+  .hero .lead{
+    max-width:36rem;
+    font-size:1rem;
+    line-height:1.55;
+  }
+  .hero .actions{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+    gap:10px;
+    margin-top:22px;
+  }
+  .hero .actions .btn{
+    width:100%;
+    min-height:50px;
+  }
+}
+
+@media(max-width:390px){
+  .hero{
+    min-height:730px;
+    background-position:54% center;
+  }
+  .hero-content{
+    padding-top:350px;
+    padding-bottom:34px;
+  }
+  .hero h1{
+    font-size:2.45rem;
+  }
+}
