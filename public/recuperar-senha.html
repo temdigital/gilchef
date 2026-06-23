@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#151511" name="theme-color"/><meta content="noindex,nofollow" name="robots"/>
+<title>Recuperar senha | Gil Personal Chef</title>
+<link href="assets/img/oficiais/favicon.png" rel="icon"/>
+<link href="assets/css/site.css" rel="stylesheet"/><link href="assets/css/auth.css" rel="stylesheet"/>
+</head><body class="auth-body"><main class="auth-shell"><section class="auth-brand">
+<a aria-label="Gil Personal Chef — início" class="brand" href="index.html"><img alt="" class="brand-mark" src="assets/img/oficiais/logo-simbolo.webp"/><span class="brand-name"><strong>Gil</strong><small>Personal Chef</small></span></a>
+<span class="eyebrow">Alta Gastronomia com Sabor Caseiro</span>
+<h1>Recupere o acesso com segurança.</h1><p>Enviaremos um link de redefinição para o e-mail cadastrado.</p><a class="text-link" href="index.html">← Voltar ao site</a>
+</section><section class="auth-card"><div><span class="eyebrow">Recuperação</span><h2>Redefinir acesso</h2></div>
+<form class="form-stack" id="recover-form"><label>E-mail<input autocomplete="email" name="email" required="" type="email"/></label>
+<button class="btn btn-primary">Enviar link</button><p aria-live="polite" class="form-message"></p></form>
+<div class="auth-links"><a href="login.html">Voltar para entrar</a></div></section></main>
+<script src="assets/vendor/supabase.min.js"></script><script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/config.js"></script><script src="assets/js/app.js"></script><script src="assets/js/auth.js"></script>
+<script>document.querySelector('#recover-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,m=f.querySelector('.form-message'),b=f.querySelector('button');try{b.disabled=true;await GilAuth.resetPassword(f.email.value);m.textContent='Se o e-mail estiver cadastrado, o link de recuperação será enviado.';}catch(err){m.textContent=err.message;}finally{b.disabled=false;}});</script></body></html>

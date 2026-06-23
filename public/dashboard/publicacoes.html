@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#151511" name="theme-color"/><meta content="noindex,nofollow" name="robots"/>
+<title>Publicações | Gil Personal Chef</title><link href="../assets/img/oficiais/favicon.png" rel="icon"/>
+<link href="../assets/css/dashboard.css" rel="stylesheet"/></head>
+<body class="dashboard-body" data-page="crud">
+<div class="sidebar-overlay"></div><div class="dashboard-layout">
+<aside class="dashboard-sidebar"><a aria-label="Gil Personal Chef — painel" class="brand" href="index.html"><img alt="" class="brand-mark" src="../assets/img/oficiais/logo-simbolo.webp"/><span class="brand-name"><strong>Gil</strong><small>Personal Chef</small></span></a>
+<nav aria-label="Painel" class="dashboard-nav" data-dashboard-nav=""></nav>
+<div class="logout-mobile"><button class="btn btn-outline btn-full" data-logout="">Sair</button></div></aside>
+<div class="dashboard-main"><header class="dashboard-topbar"><button aria-label="Abrir menu" class="mobile-nav-button" data-sidebar-toggle="">Menu</button>
+<div><strong data-profile-name="">Carregando…</strong><small data-profile-role=""></small></div><button class="btn btn-outline" data-logout="">Sair</button></header>
+<main class="dashboard-content"><div class="dashboard-title"><div><span class="eyebrow">Painel</span><h1>Publicações</h1><p>Receitas, bastidores, dicas, eventos e novidades do blog.</p></div><button class="btn btn-primary staff-only" data-new-record="">Novo registro</button></div>
+<p class="form-message" data-page-error=""></p><section class="panel"><div class="panel-head"><div><strong data-result-count="">0 registro(s)</strong></div><div class="toolbar"><input class="search" data-table-search="" placeholder="Pesquisar nesta lista"/></div></div>
+<div class="table-wrap"><table class="data-table"><thead><tr><th>Título</th><th>Categoria</th><th>Status</th><th>Publicação</th><th>Ações</th></tr></thead><tbody data-table-body=""><tr><td colspan="5">Carregando…</td></tr></tbody></table></div></section></main></div></div>
+<dialog class="dialog" id="crud-dialog"><div class="dialog-inner"><div class="dialog-head"><h2 data-dialog-title="">Registro</h2><button aria-label="Fechar" class="dialog-close" onclick="this.closest('dialog').close()">×</button></div><form></form></div></dialog>
+<script src="../assets/vendor/supabase.min.js"></script><script src="../assets/js/supabase-config.js"></script><script src="../assets/js/config.js"></script><script src="../assets/js/app.js"></script><script src="../assets/js/auth.js"></script><script src="../assets/js/dashboard-layout.js"></script>
+<script>window.PAGE_CONFIG={"table": "publicacoes", "order": "publicado_em", "columns": [{"key": "titulo", "label": "Título"}, {"key": "categoria", "label": "Categoria"}, {"key": "status", "label": "Status", "type": "status"}, {"key": "publicado_em", "label": "Publicação", "type": "date"}], "fields": [{"name": "titulo", "label": "Título", "required": true}, {"name": "slug", "label": "Slug", "readonly": true}, {"name": "resumo", "label": "Resumo", "type": "textarea", "wide": true}, {"name": "conteudo", "label": "Conteúdo HTML", "type": "textarea", "wide": true, "rows": 10}, {"name": "imagem_url", "label": "Imagem URL"}, {"name": "categoria", "label": "Categoria"}, {"name": "status", "label": "Status", "type": "select", "options": ["rascunho", "em_revisao", "agendada", "publicada", "arquivada"]}, {"name": "agendado_para", "label": "Agendar para", "type": "datetime-local"}, {"name": "titulo_seo", "label": "Título SEO"}, {"name": "descricao_seo", "label": "Descrição SEO", "type": "textarea", "wide": true}, {"name": "palavras_chave", "label": "Palavras-chave", "wide": true}]};</script><script src="../assets/js/dashboard-pages.js"></script></body></html>

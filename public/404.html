@@ -1,0 +1,12 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Redirecionando | Gil Personal Chef</title><style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f3ed;color:#151511;font-family:Arial,sans-serif}.box{max-width:620px;padding:32px;text-align:center}a{color:#76552d}</style></head><body><main class="box"><h1>Página não encontrada</h1><p>Estamos verificando o endereço.</p><p><a id="home" href="./">Voltar ao início</a></p></main><script>
+(() => {
+  const path = location.pathname;
+  const segments = path.split('/').filter(Boolean);
+  const base = location.hostname.endsWith('.github.io') && segments.length ? `/${segments[0]}/` : '/';
+  const relative = path.startsWith(base) ? path.slice(base.length).replace(/^\/+|\/+$/g,'') : path.replace(/^\/+|\/+$/g,'');
+  document.querySelector('#home').href = base;
+  if (!relative || /\.[a-z0-9]+$/i.test(relative)) return;
+  const target = `${base}${relative}.html${location.search}${location.hash}`;
+  location.replace(target);
+})();
+</script></body></html>

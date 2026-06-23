@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#151511" name="theme-color"/><meta content="noindex,nofollow" name="robots"/>
+<title>Configurações | Gil Personal Chef</title><link href="../assets/img/oficiais/favicon.png" rel="icon"/>
+<link href="../assets/css/dashboard.css" rel="stylesheet"/></head>
+<body class="dashboard-body" data-page="settings">
+<div class="sidebar-overlay"></div><div class="dashboard-layout">
+<aside class="dashboard-sidebar"><a aria-label="Gil Personal Chef — painel" class="brand" href="index.html"><img alt="" class="brand-mark" src="../assets/img/oficiais/logo-simbolo.webp"/><span class="brand-name"><strong>Gil</strong><small>Personal Chef</small></span></a>
+<nav aria-label="Painel" class="dashboard-nav" data-dashboard-nav=""></nav>
+<div class="logout-mobile"><button class="btn btn-outline btn-full" data-logout="">Sair</button></div></aside>
+<div class="dashboard-main"><header class="dashboard-topbar"><button aria-label="Abrir menu" class="mobile-nav-button" data-sidebar-toggle="">Menu</button>
+<div><strong data-profile-name="">Carregando…</strong><small data-profile-role=""></small></div><button class="btn btn-outline" data-logout="">Sair</button></header>
+<main class="dashboard-content"><div class="dashboard-title"><div><span class="eyebrow">Painel</span><h1>Configurações</h1><p>Valores centralizados usados em todo o site, inclusive o WhatsApp público.</p></div></div>
+<p class="form-message" data-page-error=""></p><section class="panel"><form class="form-stack" id="settings-form">
+<h2>Marca e contato</h2><div class="form-grid"><label>Nome do site<input name="nome_site"/></label><label>Slogan<input name="slogan"/></label>
+<label>WhatsApp oficial<input name="whatsapp" required=""/></label><label>E-mail de contato<input name="email_contato" type="email"/></label>
+<label>Horário de atendimento<input name="horario_atendimento"/></label><label>Instagram<input name="instagram" type="url"/></label>
+<label>Facebook<input name="facebook" type="url"/></label><label>TikTok<input name="tiktok" type="url"/></label><label>Kwai<input name="kwai" type="url"/></label></div>
+<h2>Deslocamento</h2><p class="dashboard-note">O valor por km é editável. Como referência externa, consulte a <a href="https://www.gov.br/antt/pt-br/assuntos/cargas/politica-nacional-de-pisos-minimos-de-frete" rel="noopener" target="_blank">calculadora oficial de pisos mínimos da ANTT</a>. A tabela de caminhões não deve ser aplicada automaticamente ao veículo do Chef; use-a apenas como parâmetro para formar o custo real.</p><div class="form-grid"><label>Raio de atendimento (km)<input name="raio_atendimento_km" type="number"/></label>
+<label>Taxa fixa de deslocamento<input name="taxa_deslocamento_fixa" step="0.01" type="number"/></label>
+<label>Valor por km<input name="valor_km" step="0.01" type="number"/></label><label>Texto da região<input name="regiao_atendimento"/></label></div>
+<h2>Pix estático</h2><div class="form-grid"><label>Tipo da chave<select name="pix_tipo_chave"><option>cpf</option><option>cnpj</option><option>email</option><option>telefone</option><option>aleatoria</option></select></label>
+<label>Chave Pix<input name="pix_chave"/></label><label>Nome do recebedor<input name="pix_nome"/></label><label>Cidade do recebedor<input name="pix_cidade"/></label></div>
+<h2>Integrações</h2><div class="form-grid"><label>ID Google Analytics<input name="google_analytics_id" placeholder="G-XXXXXXXXXX"/></label>
+<label class="check"><input name="analytics_ativo" type="checkbox"/> Analytics ativo após consentimento</label></div>
+<div class="actions"><button class="btn btn-primary">Salvar configurações</button></div>
+<p aria-live="polite" class="form-message"></p></form></section></main></div></div>
+<dialog class="dialog" id="crud-dialog"><div class="dialog-inner"><div class="dialog-head"><h2 data-dialog-title="">Registro</h2><button aria-label="Fechar" class="dialog-close" onclick="this.closest('dialog').close()">×</button></div><form></form></div></dialog>
+<script src="../assets/vendor/supabase.min.js"></script><script src="../assets/js/supabase-config.js"></script><script src="../assets/js/config.js"></script><script src="../assets/js/app.js"></script><script src="../assets/js/auth.js"></script><script src="../assets/js/dashboard-layout.js"></script>
+<script src="../assets/js/dashboard-pages.js"></script></body></html>

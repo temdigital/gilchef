@@ -1,0 +1,6 @@
+project_id = "gil-personal-chef"
+
+[functions.processar-remocao]
+# A função valida a sessão e o papel de superadministrador internamente.
+# Desativado no gateway para compatibilidade com chaves Publishable atuais.
+verify_jwt = false

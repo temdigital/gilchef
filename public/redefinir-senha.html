@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#151511" name="theme-color"/><meta content="noindex,nofollow" name="robots"/>
+<title>Nova senha | Gil Personal Chef</title>
+<link href="assets/img/oficiais/favicon.png" rel="icon"/>
+<link href="assets/css/site.css" rel="stylesheet"/><link href="assets/css/auth.css" rel="stylesheet"/>
+</head><body class="auth-body"><main class="auth-shell"><section class="auth-brand">
+<a aria-label="Gil Personal Chef — início" class="brand" href="index.html"><img alt="" class="brand-mark" src="assets/img/oficiais/logo-simbolo.webp"/><span class="brand-name"><strong>Gil</strong><small>Personal Chef</small></span></a>
+<span class="eyebrow">Alta Gastronomia com Sabor Caseiro</span>
+<h1>Defina uma nova senha.</h1><p>Use ao menos oito caracteres e evite reutilizar senhas de outros serviços.</p><a class="text-link" href="index.html">← Voltar ao site</a>
+</section><section class="auth-card"><div><span class="eyebrow">Nova senha</span><h2>Atualizar senha</h2></div>
+<form class="form-stack" id="password-form"><label>Nova senha<input autocomplete="new-password" minlength="8" name="senha" required="" type="password"/></label>
+<label>Confirmar nova senha<input autocomplete="new-password" minlength="8" name="confirmar" required="" type="password"/></label>
+<button class="btn btn-primary">Salvar nova senha</button><p aria-live="polite" class="form-message"></p></form></section></main>
+<script src="assets/vendor/supabase.min.js"></script><script src="assets/js/supabase-config.js"></script>
+<script src="assets/js/config.js"></script><script src="assets/js/app.js"></script><script src="assets/js/auth.js"></script>
+<script>document.querySelector('#password-form').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget,m=f.querySelector('.form-message'),b=f.querySelector('button');try{if(f.senha.value!==f.confirmar.value)throw new Error('As senhas não coincidem.');b.disabled=true;await GilAuth.updatePassword(f.senha.value);m.textContent='Senha atualizada. Redirecionando…';setTimeout(()=>location.href=GilApp.url('dashboard/index.html'),900);}catch(err){m.textContent=err.message;}finally{b.disabled=false;}});</script></body></html>
